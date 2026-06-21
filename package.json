@@ -1,0 +1,31 @@
+{
+  "name": "landing-wedding-planner",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/alpinejs": "^0.4.9",
+    "@astrojs/netlify": "^6.6.5",
+    "@astrojs/react": "^4.4.2",
+    "@fontsource/cinzel": "^5.2.8",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/merriweather": "^5.2.11",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/alpinejs": "^3.13.11",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
+    "alpinejs": "^3.15.8",
+    "astro": "^5.17.1",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "stripe": "^22.2.2",
+    "tailwindcss": "^4.1.18"
+  }
+}

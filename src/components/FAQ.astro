@@ -1,0 +1,95 @@
+---
+import { ChevronDown, HelpCircle } from 'lucide-react';
+
+const faqs = [
+  {
+    question: "¿En cuánto tiempo recibiré mis credenciales tras formalizar el ingreso?",
+    answer: "Una vez procesado su abono administrativo y reportado el comprobante, el Departamento de Tecnología procederá a la apertura de su expediente y generación de accesos. Recibirá sus credenciales oficiales en su correo electrónico en un lapso no mayor a 24 horas hábiles."
+  },
+  {
+    question: "¿Cuál es la duración del Máster y cuánto tiempo tengo para completarlo?",
+    answer: "El contenido programático está diseñado para ser cubierto en un periodo de un mes. No obstante, el Instituto otorga a cada estudiante un lapso de hasta un año para finalizar todas las unidades y evaluaciones, garantizando que pueda avanzar a su propio ritmo sin presiones externas."
+  },
+  {
+    question: "¿Bajo qué modalidad se imparte la formación?",
+    answer: "El Máster es 100% Online a través de nuestro Campus online institucional. Nuestra metodología es asincrónica, lo que le permite acceder a las lecciones las 24 horas del día. Además, contará con el acompañamiento permanente de un tutor asignado para guiar su aprendizaje."
+  },
+  {
+    question: "¿Cuál es el respaldo legal del Instituto y dónde se encuentran ubicados?",
+    answer: "El Instituto Osbord es una entidad académica internacional con sede matriz registrada bajo la jurisdicción educativa de los Estados Unidos (Miami, FL). Asimismo, contamos con una sede operativa en Venezuela, lo que nos permite brindar un soporte administrativo cercano a nuestros alumnos en la región. Su certificación posee validez curricular global y es un título apto para procesos de apostilla."
+  },
+  {
+    question: "¿Qué sucede si tengo fallas de internet o suministro eléctrico?",
+    answer: "El programa ha sido diseñado pensando en la flexibilidad absoluta. Al no tener horarios fijos de conexión, usted puede avanzar en sus lecciones en el momento que su conectividad se lo permita. Su progreso se guarda automáticamente en el sistema para que retome exactamente donde quedó."
+  },
+  {
+    question: "¿La Beca de Idiomas tiene algún costo adicional?",
+    answer: "No. La Beca de Idiomas es un beneficio 100% bonificado incluido en su matrícula del Máster. Tras formalizar su inscripción, podrá seleccionar el idioma de su preferencia (Inglés, Francés, Italiano, Alemán o Portugués) para iniciar su formación bilingüe de forma paralela."
+  },
+  {
+    question: "¿Cómo funciona el acceso a la Bolsa de Empleo?",
+    answer: "Tras completar satisfactoriamente su formación, usted ingresa a nuestra base de datos gestionada por el Departamento de Alianzas Corporativas. Este sistema facilita su vinculación con empresas del sector de eventos y prácticas profesionales que impulsarán su inserción en el mercado laboral."
+  },
+  {
+    question: "¿Cuáles son los métodos de pago aceptados?",
+    answer: "Para su comodidad, aceptamos diversos métodos de pago: Pago Móvil (Bs), Transferencia Bancaria Nacional (Banesco), Zinli, Binance Pay (USDT) y Zelle. Es importante destacar que todos los pagos realizados en Bolívares se calculan a la tasa oficial del Banco Central de Venezuela (BCV) del día. Si desea pagar vía Zelle, puede solicitar los datos actualizados a través de nuestro soporte por WhatsApp."
+  }
+];
+---
+
+<section id="faq" class="py-20 bg-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 bg-navy/5 px-4 py-2 rounded-full border border-navy/10 mb-4">
+        <HelpCircle class="w-4 h-4 text-navy" />
+        <span class="text-xs font-bold uppercase tracking-widest text-navy/70">Centro de Ayuda</span>
+      </div>
+      <h2 class="text-2xl md:text-4xl font-serif font-bold text-navy mb-4">Preguntas Frecuentes</h2>
+      <p class="text-slate-600">Todo lo que necesitas saber antes de comenzar tu formación profesional.</p>
+    </div>
+
+    <div class="space-y-3" x-data="{ active: null }">
+      {faqs.map((faq, index) => (
+        <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300" 
+             :class={`active === ${index} ? 'ring-1 ring-gold shadow-lg shadow-gold/5 border-gold/30' : 'hover:border-slate-300'`}>
+          <button 
+            @click={`active === ${index} ? active = null : active = ${index}`}
+            class="w-full flex items-center justify-between p-5 text-left bg-white transition-colors"
+            :class={`active === ${index} ? 'text-navy' : 'text-slate-700'`}
+          >
+            <span class="font-bold text-sm md:text-base leading-snug">{faq.question}</span>
+            <span class="text-gold flex-shrink-0 ml-4 transition-transform duration-300" :class={`active === ${index} ? 'rotate-180' : ''`}>
+              <ChevronDown class="w-5 h-5" />
+            </span>
+          </button>
+          
+          <div 
+            x-show={`active === ${index}`}
+            x-collapse
+            x-cloak
+            class="bg-slate-50/50"
+          >
+            <div class="p-5 pt-0 text-slate-600 text-sm md:text-base leading-relaxed border-t border-slate-100/50">
+              {faq.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 p-6 bg-navy rounded-2xl text-center text-white">
+       <p class="text-sm text-blue-200 mb-4">¿Aún tienes alguna duda técnica?</p>
+       <a 
+          href="https://wa.me/13072923715?text=Hola%2C%20tengo%20algunas%20dudas%20adicionales%20sobre%20el%20M%C3%A1ster%20que%20no%20aparecen%20en%20el%20FAQ" 
+          target="_blank"
+          class="inline-flex items-center gap-2 bg-white text-navy font-bold py-3 px-8 rounded-full hover:bg-gold hover:text-navy transition-all transform hover:scale-105"
+       >
+          Hablar con un asesor
+       </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  [x-cloak] { display: none !important; }
+</style>

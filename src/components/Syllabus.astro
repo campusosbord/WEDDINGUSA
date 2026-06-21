@@ -1,0 +1,115 @@
+---
+import { Plus, Minus, Check } from 'lucide-react';
+
+const modules = [
+  {
+    title: "MÓDULO 1: ORGANIZACIÓN DE EVENTOS",
+    units: "Comunicación, Perfil del Event Manager, Cultura Corporativa, Briefing y Presupuesto, Planificación, Protocolo y Seguridad, Marketing, Recursos Masivos, Realización, Post-Evento, Tipos de Eventos, Herramientas, Montaje de Tarimas, Administración Presupuestaria, Dirección y Control, Examen de Evaluación: Módulo 1."
+  },
+  {
+    title: "MÓDULO 2: WEDDING PLANNER",
+    units: "Estructura de la Boda, Protocolo, Ceremonias (Civil/Religiosa), Diseño de Bodas, Invitaciones, El Banquete, Flores y Música, Aspectos Legales, Decoración, Los Novios (Estilismo), Plan de Marketing, Wedding Management, Asesoría de Imagen, Maquillaje (Día/Tarde/Noche), Protocolo en Restauración, Examen de Evaluación: Módulo 2."
+  },
+  {
+    title: "MÓDULO 3: POST-WEDDING",
+    units: "Luna de Miel, Destinos Turísticos, Visados, Examen de Evaluación: Módulo 3."
+  },
+  {
+    title: "MÓDULO 4: EMPRESA Y LEGALIDAD",
+    units: "Plan de Negocio, Rentabilidad, Marketing de la Empresa, Identidad Corporativa, Examen de Evaluación: Módulo 4."
+  },
+  {
+    title: "MÓDULO 5: CELEBRACIONES MÁGICAS",
+    units: "Gender Reveal (Evolución y Mercado), Ética y Confidencialidad, Efectos Especiales de Impacto, Planificación de Baby Showers, Digitalización (Baby Registry), Técnica de Decoración con Globos, Candy Bar Profesional, Bautizos y Primeras Comuniones, Protocolo Litúrgico, Papelería Artesanal de Lujo, Smash the Cake (Logística y Diseño), Fiestas Infantiles Temáticas, Teepee Parties, Gestión de Alérgenos, Logística de Cumpleaños, Protocolo de Residuo Cero, Examen de Evaluación: Módulo 5."
+  },
+  {
+    title: "MÓDULO 6: XV AÑOS Y SWEET 16 DE ALTO IMPACTO",
+    units: "Psicología y Diseño de XV Años, Gestión del Presupuesto Familiar, Identidad Visual 360º, Estructura Protocolar Clásica, El Vals de Honor, Ceremonia de las 15 Velas, Gestión de Damas y Chambelanes, El 'Baile Sorpresa', Entradas Triunfales, Arquitectura del Vestido, Estilismo y Maquillaje HD, Producción Técnica y Escenografía, Ingeniería de Iluminación, Pistas de Baile LED, Hora Loca de Autor, Glambot y Plataformas 360º, Examen de Evaluación: Módulo 6."
+  },
+  {
+    title: "MÓDULO 7: CUMPLEAÑOS DE ADULTOS y ANIVERSARIOS",
+    units: "Estrategia del Cliente Adulto, Hitos Generacionales (30-40-50), Fiestas Temáticas Premium, Diseño de Iluminación Ambiental, Alta Gastronomía y Mixología, Maridaje y Catas Dirigidas, Bodas de Plata y Oro, Renovación de Votos (Rituales), Storytelling Emocional, Dirección Musical (Jazz/Bossa Nova), Espectáculos de Alto Impacto, Logística de Eventos en Casa, Protocolo de Anfitriones, Liquidación de Proveedores, Fidelización de Clientes, Examen de Evaluación: Módulo 7."
+  },
+  {
+    title: "MÓDULO 8: CORPORATE ELITE & MICE",
+    units: "Ingeniería de Eventos MICE, Acreditaciones Inteligentes (RFID), Sourcing de Sedes (Venues), Protocolo de Estado y Precedencias, Manual de Estilo Corporativo, Lanzamiento de Producto (Branding Espacial), Marketing de Influencia, Eventos Híbridos y Streaming, Team Building y Clima Organizacional, Turismo de Incentivos, Catering Ejecutivo (Finger Food), Sostenibilidad Corporativa, Estrategia de Patrocinio (Sponsorship), Activación de Marca, Examen de Evaluación: Módulo 8."
+  },
+  {
+    title: "MÓDULO 9: EL FUTURO DE LOS EVENTOS",
+    units: "IA Generativa: Midjourney y DALL-E, Ingeniería de Prompts (ChatGPT/Claude), Presentaciones Automatizadas, IA en Logística y Check-in, Biometría y Reconocimiento Facial, ODS y Agenda 2030, Descarbonización y Huella de Carbono, Neuromarketing y Diseño Sensorial, Diseño Olfativo (Odotipo), Cromatismo Emocional, Storytelling y Narrativa Transviva, Destination Events (Scouting Internacional), Logística de Vuelos Chárter, Conserjería VIP, Examen de Evaluación: Módulo 9."
+  },
+  {
+    title: "MÓDULO 10: GESTIÓN DE AGENCIA 360º",
+    units: "Software de Gestión (Asana/Monday/Notion), Social Tables (Planimetría), CRM y Embudos de Venta, Modelos de Negocio (Consultoría/Producción), Estructura de Honorarios (Fees), Pricing Estratégico, Marco Legal y Contratos, Responsabilidad Civil y Seguros, Venta Consultiva y Método Harvard, Pitch de Venta Persuasivo, Marca Personal y Portfolio, Meta Ads y Google Ads, Liderazgo y Equipos, Escalabilidad de la Agencia, Examen de Evaluación: Módulo 10."
+  },
+  {
+    title: "MÓDULO 11: DISEÑO Y PHOTOSHOP (PLUS)",
+    units: "Herramientas de Photoshop, Retoque, Montaje de Propuestas Visuales, Planos, Examen de Evaluación: Módulo 11."
+  },
+  {
+    title: "MÓDULO 12: EXAMEN FINAL",
+    units: "Examen final."
+  }
+];
+---
+
+<section class="py-20 bg-slate-50">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-4xl font-bold font-serif text-navy mb-4">Lo que aprenderás en la Formación Ejecutiva</h2>
+      <p class="text-slate-600">Un programa integral diseñado para el éxito.</p>
+    </div>
+
+    <div class="space-y-4" x-data="{ active: null }">
+      {modules.map((module, index) => (
+        <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all">
+          <button 
+            @click={`active === ${index} ? active = null : active = ${index}`}
+            class="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+          >
+            <span class="font-bold text-navy text-xs md:text-base">{module.title}</span>
+            <span class="text-gold transition-transform duration-300" :class={`active === ${index} ? 'rotate-180' : ''`}>
+              <div x-show={`active !== ${index}`}>
+                <Plus class="w-6 h-6" />
+              </div>
+              <div x-show={`active === ${index}`} style="display: none;">
+                <Minus class="w-6 h-6" />
+              </div>
+            </span>
+          </button>
+          
+            <div 
+              x-show={`active === ${index}`}
+              x-collapse
+              class="bg-slate-50 border-t border-slate-100"
+              style="display: none;"
+            >
+              <div class="p-5">
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {module.units.split(',').map((unit) => {
+                    const isExam = unit.toLowerCase().includes('examen');
+                    return (
+                      <li class={`flex items-start gap-2 text-sm ${isExam ? 'font-bold text-navy mt-2 md:col-start-2' : 'text-slate-600'}`}>
+                        <Check class={`w-4 h-4 mt-0.5 shrink-0 ${isExam ? 'text-slate-500' : 'text-slate-400'}`} />
+                        <span>{unit.trim()}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a 
+        href="/checkout" 
+        onclick="trackInitiateCheckout()"
+        class="inline-flex items-center gap-2 bg-navy hover:bg-slate-800 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-xl shadow-lg transition-all transform hover:scale-105 text-sm md:text-base"
+      >
+        ¡QUIERO ESTE MÁSTER - INSCRIBIRME AHORA!
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+---
+import { Sparkles, ArrowRight, CheckCircle, Clock } from 'lucide-react';
+---
+
+<section class="relative py-24 overflow-hidden" style="background: linear-gradient(to bottom, #e6e6e6, #f8fafc);">
+  <!-- Decorative Elements -->
+  <div class="absolute top-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-navy/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+  
+  <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+    
+    <!-- Elegant Card Frame -->
+    <div class="relative bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-200 p-10 md:p-14 overflow-hidden">
+      
+      <!-- Urgency Badge - Top Right Corner (Elegant Gold) -->
+      <div class="absolute top-4 right-4 bg-gradient-to-r from-gold to-gold-dark text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+        <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+        <span class="text-sm font-semibold">Pocos Cupos Disponibles</span>
+      </div>
+      
+      <!-- Gold Corner Accent -->
+      <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-gold/20 to-transparent rounded-br-full"></div>
+      <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-navy/10 to-transparent rounded-tr-full"></div>
+      
+      <!-- Inner Border Detail -->
+      <div class="absolute inset-4 border border-slate-100 rounded-2xl pointer-events-none"></div>
+      
+      <div class="relative text-center pt-8">
+        
+        <!-- Elegant Badge -->
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-gold/10 to-gold/5 px-5 py-2 rounded-full border border-gold/20 mb-8">
+          <Sparkles class="w-4 h-4 text-gold" />
+          <span class="text-sm font-medium text-navy/80 tracking-wide">Transforma Tu Pasión en Profesión</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h2 class="text-2xl md:text-5xl font-serif font-bold text-navy mb-6 leading-tight">
+          El momento de actuar<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-dark to-gold">es ahora</span>
+        </h2>
+
+        <!-- Subtitle -->
+        <p class="text-lg text-slate-600 max-w-xl mx-auto mb-10 leading-relaxed">
+          Únete a una comunidad selecta de profesionales que han decidido convertir su creatividad en un negocio exitoso.
+        </p>
+
+        <!-- Elegant Benefits List -->
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-10 text-sm">
+          <div class="flex items-center gap-2 text-slate-600">
+            <CheckCircle class="w-4 h-4 text-emerald-500" />
+            <span>Certificación Internacional</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-600">
+            <CheckCircle class="w-4 h-4 text-emerald-500" />
+            <span>Bolsa de Empleo Exclusiva</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-600">
+            <CheckCircle class="w-4 h-4 text-emerald-500" />
+            <span>Financiamiento Flexible</span>
+          </div>
+        </div>
+
+        <!-- Urgency Micro Element -->
+        <div class="inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-4 py-2 rounded-full text-sm mb-8 border border-amber-100">
+          <Clock class="w-4 h-4" />
+          <span class="font-medium">Inscripciones abiertas solo hasta completar grupo</span>
+        </div>
+
+        <!-- Premium CTA -->
+        <div>
+          <a 
+            href="/checkout" 
+            onclick="trackInitiateCheckout()"
+            class="group relative inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-navy to-navy-light hover:from-navy-light hover:to-navy text-white font-semibold text-sm md:text-lg px-6 py-3.5 md:px-12 md:py-5 rounded-full shadow-xl shadow-navy/25 hover:shadow-2xl hover:shadow-navy/40 transition-all duration-500 transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <span class="whitespace-nowrap">Reservar Mi Lugar Ahora</span>
+            <ArrowRight class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+            
+            <!-- Shine Effect -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+          </a>
+        </div>
+
+        <!-- Subtle Trust Note -->
+        <p class="text-slate-400 text-xs mt-6 flex items-center justify-center gap-2">
+          🔒 Pago 100% seguro • Garantía de satisfacción
+        </p>
+
+      </div>
+    </div>
+    
+  </div>
+</section>

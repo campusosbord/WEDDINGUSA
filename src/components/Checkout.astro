@@ -1,0 +1,226 @@
+---
+import { ChevronDown, ChevronUp, Copy, CheckCircle, Smartphone, Landmark, ShieldCheck, HelpCircle } from 'lucide-react';
+import FAQ from './FAQ.astro';
+---
+
+<section id="checkout" class="py-20 bg-slate-100">
+  <div class="container mx-auto px-4 max-w-2xl">
+    
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+      <!-- Header of Checkout -->
+      <div class="bg-navy p-6 text-white text-center">
+        <h2 class="text-2xl font-bold font-serif">Finalizar Matrícula</h2>
+        <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20 mt-2">
+          <ShieldCheck class="w-4 h-4 text-emerald-400" />
+          <span class="text-sm font-medium text-white">Pago 100% Seguro</span>
+          <span class="text-slate-400 text-xs">|</span>
+          <span class="text-sm text-blue-100">Garantía de Satisfacción</span>
+        </div>
+      </div>
+
+      <div class="p-6 md:p-8 space-y-8">
+        <div x-data="{ 
+            loading: false,
+            plan: 'full', 
+            prices: {
+              'full': 'price_1TkmH7HAnHuL4gEX4uKIlK8v',
+              'finance1': 'price_1TkmPyHAnHuL4gEXcWPIa4sh',
+              'finance2': 'price_1TkmTBHAnHuL4gEXvyT6ibvA'
+            },
+            get total() { 
+              if(this.plan === 'full') return 297.00;
+              if(this.plan === 'finance1') return 159.00;
+              if(this.plan === 'finance2') return 115.00;
+            },
+            get planName() {
+              if(this.plan === 'full') return 'Pago Único';
+              if(this.plan === 'finance1') return '2 Cuotas Mensuales';
+              if(this.plan === 'finance2') return '3 Cuotas Mensuales';
+            },
+            async processFinalStep() {
+              this.loading = true;
+              
+              // Meta Pixel Tracking
+              try {
+                if (window.fbq) {
+                  fbq('track', 'InitiateCheckout', {
+                    value: this.total,
+                    currency: 'USD',
+                    content_name: 'Inscripción Máster Wedding Planner',
+                    content_category: 'Educación',
+                    content_ids: [this.plan]
+                  });
+                }
+              } catch(err) { console.warn('FB Pixel Error', err); }
+
+              try {
+                const response = await fetch('/api/crear-pago', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ plan: this.plan })
+                });
+                
+                const data = await response.json();
+                if (data.url) {
+                  window.location.href = data.url;
+                } else {
+                  alert('Error al iniciar el pago: ' + (data.error || 'Intente de nuevo.'));
+                  this.loading = false;
+                }
+              } catch (e) {
+                console.error('Error:', e);
+                alert('Error al conectar con la pasarela de pago.');
+                this.loading = false;
+              }
+            }
+        }" class="space-y-8">
+        
+        <div id="payment-section" class="space-y-8">
+          <div>
+            <p class="font-bold text-navy mb-2">1. Elige tu plan de pago:</p>
+            
+            <!-- Plan Full -->
+            <div class="border rounded-lg p-3 cursor-pointer transition-all" 
+                  @click="plan = 'full'"
+                  :class="plan === 'full' ? 'border-emerald-500 bg-emerald-50/30 ring-1 ring-emerald-500' : 'border-slate-200 hover:border-slate-300'">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center">
+                    <div x-show="plan === 'full'" class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-navy text-sm">Pago Único</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-emerald-600">$297 USD</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Finance 1 -->
+            <div class="border rounded-lg p-3 cursor-pointer transition-all mt-3" 
+                  @click="plan = 'finance1'"
+                  :class="plan === 'finance1' ? 'border-emerald-500 bg-emerald-50/30 ring-1 ring-emerald-500' : 'border-slate-200 hover:border-slate-300'">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center">
+                    <div x-show="plan === 'finance1'" class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-navy text-sm">2 Cuotas Mensuales</p>
+                    <p class="text-xs text-slate-500">$159 Inicial + 1 de $159</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-navy">$159 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Finance 2 -->
+            <div class="border rounded-lg p-3 cursor-pointer transition-all mt-3" 
+                  @click="plan = 'finance2'"
+                  :class="plan === 'finance2' ? 'border-emerald-500 bg-emerald-50/30 ring-1 ring-emerald-500' : 'border-slate-200 hover:border-slate-300'">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center">
+                    <div x-show="plan === 'finance2'" class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-navy text-sm">3 Cuotas Mensuales</p>
+                    <p class="text-xs text-slate-500">$115 Inicial + 2 de $115</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-navy">$115 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2">Resumen del Pedido</h3>
+            <div class="flex justify-between items-center mb-2">
+              <div>
+                <p class="font-medium text-navy">Máster Ejecutivo en Organización de Eventos & Wedding Planner</p>
+                <p class="text-xs text-slate-400" x-text="planName">Pago Único</p>
+              </div>
+              <div class="text-right">
+                <p class="font-bold text-navy text-xl" x-text="'$' + total.toFixed(2) + ' USD'"></p>
+                <p class="text-[10px] text-slate-400 font-medium uppercase mt-1">A pagar hoy</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <div class="bg-blue-50 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-blue-100 transition-colors" onclick="window.open('https://wa.me/13072923715?text=Hola%2C%20tengo%20problemas%20para%20realizar%20el%20pago%20en%20la%20web', '_blank')">
+              <div class="flex items-center gap-3">
+                <div class="bg-white p-2 rounded-full text-blue-600 shadow-sm border border-blue-100 group-hover:scale-110 transition-transform">
+                   <HelpCircle class="w-5 h-5" />
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-navy">¿Problemas con el pago?</p>
+                  <p class="text-xs text-slate-500">Contactar Soporte de Caja</p>
+                </div>
+              </div>
+              <div class="bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-sm border border-blue-100">
+                Ayuda
+              </div>
+            </div>
+          </div>
+
+          <!-- Final Validation and Stripe Button -->
+          <div class="pt-8">
+            <button 
+              @click="processFinalStep()"
+              :disabled="loading"
+              class="group block w-full bg-navy hover:bg-slate-800 text-white font-bold text-lg py-4 px-6 rounded-xl shadow-lg transition-all text-center relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale-[0.5] active:scale-[0.98]"
+            >
+              <!-- Ready State -->
+              <div 
+                x-show="!loading" 
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 transform translate-y-1"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                class="flex items-center justify-center gap-2"
+              >
+                 <span>REALIZAR INSCRIPCIÓN</span>
+              </div>
+
+              <!-- Loading State -->
+              <div 
+                x-show="loading" 
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                class="absolute inset-0 flex items-center justify-center gap-3 bg-slate-800"
+              >
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-sm uppercase tracking-widest font-bold">Redirigiendo a Stripe...</span>
+              </div>
+            </button>
+            <p class="text-center text-xs text-slate-400 mt-3 flex items-center justify-center gap-1">
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Pago 100% Seguro Procesado por Stripe
+            </p>
+          </div>
+        </div> <!-- Closing the x-data div -->
+
+        <div class="mt-12 px-2">
+          <FAQ />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Any custom checkout styles if needed */
+</style>

@@ -1,0 +1,125 @@
+---
+import '@fontsource/merriweather';
+import '@fontsource/inter';
+import '../styles/global.css';
+
+import FloatingBar from '../components/FloatingBar.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Máster Ejecutivo en Organización de Eventos & Wedding Planner - Instituto Osbord" } = Astro.props;
+const pathname = new URL(Astro.request.url).pathname;
+const isCheckout = pathname === '/checkout' || pathname === '/checkout/'; // Normalize check
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<!-- Google Tag Manager -->
+		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-P5F9NFNR');</script>
+		<!-- End Google Tag Manager -->
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLSP38RBXJ"></script>
+		<script is:inline>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-NLSP38RBXJ');
+		</script>
+
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/webp" href="/images/logofaviconosbord.webp" />
+		<link rel="apple-touch-icon" href="/images/logofaviconosbord.webp" />
+		<link rel="shortcut icon" type="image/webp" href="/images/logofaviconosbord.webp" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="google-site-verification" content="EanYHzohzwMXIO-YxPw2MQP0hqSyQXgNYj3NDlW0i24" />
+		<title>{title}</title>
+
+		<!-- Preconnect to critical domains -->
+		<link rel="preconnect" href="https://ve.dolarapi.com" />
+		<link rel="preconnect" href="https://connect.facebook.net" />
+		<link rel="dns-prefetch" href="https://ve.dolarapi.com" />
+		
+		<!-- Meta Pixel Code -->
+		<script is:inline>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '4325234107759872');
+		fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=4325234107759872&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Meta Pixel Code -->
+
+		<script is:inline>
+		window.trackInitiateCheckout = function() {
+			if (window.fbq) {
+				fbq('track', 'InitiateCheckout');
+			}
+			if (window.gtag) {
+				gtag('event', 'begin_checkout', {
+					currency: 'USD',
+					value: 297.00, // Default value, can be generalized if needed
+					items: [{
+						item_id: 'master_wedding_planner',
+						item_name: 'Inscripción Máster Wedding Planner',
+						item_category: 'Educación',
+						price: 297.00,
+						quantity: 1
+					}]
+				});
+			}
+		};
+		</script>
+	</head>
+	<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5F9NFNR"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		
+		<slot />
+		
+		<!-- WhatsApp Floating Bar -->
+		{ !isCheckout && <FloatingBar /> }
+	</body>
+</html>
+
+<style is:global>
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Merriweather', serif;
+	}
+	
+	/* Custom scrollbar for webkit */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: #f1f5f9; 
+	}
+	::-webkit-scrollbar-thumb {
+		background: #cbd5e1; 
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #94a3b8; 
+	}
+</style>
