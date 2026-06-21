@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import logoImage from '../images/logo.webp';
 
 const pathname = new URL(Astro.request.url).pathname;
-const isCheckout = pathname.startsWith('/checkout');
+const isCheckout = pathname.startsWith('/checkout') || pathname.startsWith('/registro');
 ---
 
 <header 

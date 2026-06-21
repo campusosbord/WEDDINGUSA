@@ -12,7 +12,7 @@ interface Props {
 
 const { title, description = "Máster Ejecutivo en Organización de Eventos & Wedding Planner - Instituto Osbord" } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
-const isCheckout = pathname === '/checkout' || pathname === '/checkout/'; // Normalize check
+const isCheckout = pathname === '/checkout' || pathname === '/checkout/' || pathname === '/registro' || pathname === '/registro/'; // Normalize check
 ---
 
 <!doctype html>

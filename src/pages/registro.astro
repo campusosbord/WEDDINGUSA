@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from 'lucide-react';
+---
+
+<Layout title="Completar Registro | Instituto Osbord">
+  <Header />
+  
+  <main class="pt-28 pb-20 min-h-screen bg-slate-50 flex items-center justify-center">
+    <div class="container mx-auto px-4 max-w-xl">
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        
+        <!-- Success Banner -->
+        <div class="bg-navy p-8 text-white text-center relative overflow-hidden">
+          <!-- Decorative background circles -->
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full"></div>
+          <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-white/5 rounded-full"></div>
+          
+          <div class="relative z-10 space-y-3">
+            <div class="inline-flex items-center justify-center bg-emerald-500/20 text-emerald-400 p-3 rounded-full border border-emerald-400/20 mb-1">
+              <CheckCircle class="w-12 h-12" />
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold font-serif">¡Pago Realizado!</h2>
+            <p class="text-slate-300 text-sm max-w-md mx-auto">
+              Tu matrícula para el Máster Ejecutivo en Organización de Eventos & Wedding Planner ha sido procesada con éxito.
+            </p>
+          </div>
+        </div>
+
+        <!-- Notification Box (Required Step Info) -->
+        <div class="bg-amber-50 border-y border-amber-200 p-5 text-amber-900 flex gap-3.5 items-start">
+          <ShieldCheck class="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+          <div class="space-y-1">
+            <p class="font-bold text-sm tracking-wide uppercase text-amber-950">Paso Obligatorio: Completar Registro</p>
+            <p class="text-xs text-amber-900/90 leading-relaxed font-sans">
+              Por favor, completa el siguiente formulario con tus datos para habilitar el botón de envío a WhatsApp. <strong class="font-semibold text-amber-950">El proceso de inscripción formal en la plataforma de estudio puede demorar entre 1 a 24 horas hábiles.</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- Form and Submission Section -->
+        <div class="p-6 md:p-8 space-y-6">
+          <div x-data="{
+              nombre: '',
+              email: '',
+              idDocument: '',
+              telefono: '',
+              whatsappNumber: '13072923715',
+              get isFormValid() {
+                return this.nombre.trim() !== '' && 
+                       this.email.trim() !== '' && 
+                       this.idDocument.trim() !== '' && 
+                       this.telefono.trim() !== '';
+              },
+              async sendWhatsApp() {
+                if (!this.isFormValid) return;
+                
+                const params = new URLSearchParams(window.location.search);
+                const planParam = params.get('plan');
+                let planName = 'Plan de Pago (Confirmar con soporte)';
+                if (planParam === 'full') planName = 'Pago Único ($297 USD)';
+                if (planParam === 'finance1') planName = 'Financiamiento de 2 Cuotas ($159 USD)';
+                if (planParam === 'finance2') planName = 'Financiamiento de 3 Cuotas ($115 USD)';
+                
+                // Enviar datos a Google Sheets (Ruta: weddingusa)
+                const payload = JSON.stringify({
+                  nombre: this.nombre.trim(),
+                  telefono: this.telefono.trim(),
+                  email: this.email.trim(),
+                  origen: 'weddingusa',
+                  page_url: window.location.href,
+                  user_agent: navigator.userAgent
+                });
+
+                try {
+                  await Promise.race([
+                    fetch('https://script.google.com/macros/s/AKfycbyYsqNrX5V08QAl3Cp7oUD0_unWsUpFIqhpSvnZ5ChkcIsf55Z9KOTLftDGFo-E-A/exec', {
+                      method: 'POST',
+                      mode: 'no-cors',
+                      keepalive: true,
+                      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                      body: payload
+                    }),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                  ]);
+                } catch (e) {
+                  console.error('[Google Sheets] Error al registrar datos:', e);
+                }
+                
+                const message = `Hola, acabo de realizar mi pago para el Máster de Wedding Planner y quiero completar mi registro.\n\n` +
+                                `*DATOS DEL ESTUDIANTE:*\n` +
+                                `• *Nombre completo:* ${this.nombre.trim()}\n` +
+                                `• *Correo electrónico:* ${this.email.trim()}\n` +
+                                `• *ID / Identificación:* ${this.idDocument.trim()}\n` +
+                                `• *Teléfono:* ${this.telefono.trim()}\n` +
+                                `• *Plan adquirido:* ${planName}`;
+                                
+                const encodedText = encodeURIComponent(message);
+                const url = `https://wa.me/${this.whatsappNumber}?text=${encodedText}`;
+                window.open(url, '_blank');
+              }
+          }" class="space-y-5">
+            
+            <div class="space-y-4">
+              <!-- Full Name Field -->
+              <div>
+                <label for="nombre" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Nombre Completo</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <User class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="text" 
+                    id="nombre" 
+                    x-model="nombre"
+                    placeholder="Ej. María Pérez" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div>
+                <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Correo Electrónico</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <Mail class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    x-model="email"
+                    placeholder="Ej. maria@correo.com" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- Identification Document Field -->
+              <div>
+                <label for="idDocument" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Documento de Identificación (ID / Cédula / DNI)</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <FileText class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="text" 
+                    id="idDocument" 
+                    x-model="idDocument"
+                    placeholder="Ej. 12345678" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- Phone Field -->
+              <div>
+                <label for="telefono" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Número de Teléfono (con código de país)</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <Phone class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="tel" 
+                    id="telefono" 
+                    x-model="telefono"
+                    placeholder="Ej. +13072923715" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button (WhatsApp Link Trigger) -->
+            <div class="pt-4 border-t border-slate-100">
+              <button 
+                @click="sendWhatsApp()"
+                :disabled="!isFormValid"
+                class="w-full font-bold text-base py-4 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                :class="isFormValid ? 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20' : 'bg-slate-300 text-slate-500'"
+              >
+                <!-- SVG Icon for WhatsApp -->
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.705 1.459h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                <span>COMPLETAR REGISTRO VÍA WHATSAPP</span>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <!-- Client-side Conversion Tracking Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Parse URL parameters to fetch plan type and session ID
+      const params = new URLSearchParams(window.location.search);
+      const plan = params.get('plan');
+      const sessionId = params.get('session_id');
+
+      if (plan && sessionId) {
+        // 2. Map plan identifier to transaction price
+        let value = 297.00;
+        let planFriendlyName = 'Pago Único';
+        if (plan === 'finance1') {
+          value = 159.00;
+          planFriendlyName = '2 Cuotas Mensuales';
+        } else if (plan === 'finance2') {
+          value = 115.00;
+          planFriendlyName = '3 Cuotas Mensuales';
+        }
+
+        // 3. Deduplicate tracking calls per Session ID using LocalStorage
+        const trackingKey = `tracked_purchase_${sessionId}`;
+        if (localStorage.getItem(trackingKey)) {
+          console.log('[Tracking] Compra ya reportada anteriormente para la sesión:', sessionId);
+          return;
+        }
+
+        // 4. Report Meta Pixel Purchase Event
+        if (window.fbq) {
+          fbq('track', 'Purchase', {
+            value: value,
+            currency: 'USD',
+            content_name: 'Inscripción Máster Wedding Planner',
+            content_category: 'Educación',
+            content_ids: [plan],
+            content_type: 'product'
+          });
+          console.log('[Tracking] Éxito: Compra reportada a Meta Pixel:', { value, plan });
+        } else {
+          console.warn('[Tracking] Advertencia: fbq no está inicializado.');
+        }
+
+        // 5. Report Google Analytics 4 purchase Event
+        if (window.gtag) {
+          gtag('event', 'purchase', {
+            transaction_id: sessionId,
+            value: value,
+            currency: 'USD',
+            items: [{
+              item_id: `wedding_planner_${plan}`,
+              item_name: `Inscripción Máster Wedding Planner (${planFriendlyName})`,
+              price: value,
+              quantity: 1,
+              item_category: 'Educación'
+            }]
+          });
+          console.log('[Tracking] Éxito: Compra reportada a GA4:', { sessionId, value, plan });
+        } else {
+          console.warn('[Tracking] Advertencia: gtag no está inicializado.');
+        }
+
+        // Store execution in local storage to prevent duplicate hits on reload
+        localStorage.setItem(trackingKey, 'true');
+      } else {
+        console.warn("[Tracking] Acceso a /registro sin parámetros de compra válidos (plan o session_id faltante).");
+      }
+    });
+  </script>
+</Layout>
+

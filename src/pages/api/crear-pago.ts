@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
           },
         ],
         mode: 'payment',
-        success_url: `${origin}/?success=true`,
+        success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=full`,
         cancel_url: `${origin}/checkout`,
       };
     } else if (plan === 'finance1') {
@@ -56,7 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
             plan_type: 'financiamiento-2',
           },
         },
-        success_url: `${origin}/?success=true`,
+        success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=finance1`,
         cancel_url: `${origin}/checkout`,
       };
     } else if (plan === 'finance2') {
@@ -76,7 +76,7 @@ export const POST: APIRoute = async ({ request }) => {
             plan_type: 'financiamiento-3',
           },
         },
-        success_url: `${origin}/?success=true`,
+        success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=finance2`,
         cancel_url: `${origin}/checkout`,
       };
     } else {

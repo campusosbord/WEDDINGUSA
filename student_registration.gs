@@ -16,6 +16,17 @@ const SHEET_URL = "https://docs.google.com/spreadsheets/d/1Wz-CqEcyzFKh0sb0OEnZR
  * EL ENRUTADOR (Define hojas y píxeles)
  * ========================================================================== */
 const RUTAS = {
+  "weddingusa": { 
+    hoja: "weddingusa",
+    prepararFila: (data, fecha) => [data.nombre || "", data.telefono || "", data.email || "", fecha],
+    enviarMeta: true,
+    pixel: LLC_PIXEL_ID,
+    token: LLC_ACCESS_TOKEN,
+    metaNombre: "Master Wedding Planner USA",
+    metaCategoria: "Formacion Ejecutiva",
+    valorDefecto: 297.00,
+    metaEvento: "Purchase"
+  },
   "enfermeria": { 
     hoja: "datausaenfermeria",
     prepararFila: (data, fecha) => [data.nombre || "", data.telefono || "", data.email || "", fecha],
