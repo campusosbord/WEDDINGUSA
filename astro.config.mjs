@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import alpinejs from '@astrojs/alpinejs';
-import react from '@astrojs/react';
 import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
@@ -15,5 +14,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [alpinejs(), react()]
+  integrations: [alpinejs()]
 });

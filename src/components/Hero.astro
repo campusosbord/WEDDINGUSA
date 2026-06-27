@@ -1,16 +1,22 @@
 ---
-import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock, Smartphone, Landmark } from 'lucide-react';
+import { Image } from 'astro:assets';
+import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock } from '@lucide/astro';
+import heroImage from '../images/wedding-hero.jpg';
 ---
 
 <section class="relative min-h-screen flex items-center justify-center pt-20 pb-12 overflow-hidden">
   <!-- Dynamic Background with Overlay -->
   <div class="absolute inset-0 z-0">
-    <img 
-      src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+    <Image 
+      src={heroImage} 
       alt="Boda de lujo decorada con elegancia" 
       class="w-full h-full object-cover"
       loading="eager"
       fetchpriority="high"
+      widths={[640, 1024, 1440, 2070]}
+      sizes="100vw"
+      format="webp"
+      quality={75}
     />
     <div class="absolute inset-0 bg-navy/80 mix-blend-multiply"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent"></div>
@@ -91,7 +97,9 @@ import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock, Smartphone, Landmar
           <!-- Option 1: Full Payment -->
           <div class="bg-navy-light/10 p-4 rounded-lg border border-navy/10 relative overflow-hidden">
              <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Inscripción Regular (Único Pago)</p>
-             <p class="text-4xl font-bold text-navy font-serif">$297 <span class="text-lg text-slate-400 font-sans font-normal">USD</span></p>
+             <p class="text-4xl font-bold text-navy font-serif">
+               <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$457</span>$297 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
+             </p>
           </div>
 
           <!-- Financing Options -->
