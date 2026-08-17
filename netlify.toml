@@ -1,0 +1,27 @@
+# Netlify configuration file
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Forzar compresión de componentes y habilitar optimizaciones básicas
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+# Cachear recursos estáticos de compilación de Astro (CSS, JS y fuentes hash-named) de forma persistente
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cachear imágenes de la carpeta pública
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Cachear favicons y otros recursos raíz
+[[headers]]
+  for = "/favicon.*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

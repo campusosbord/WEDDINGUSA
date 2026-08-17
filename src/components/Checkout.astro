@@ -6,7 +6,11 @@ import FAQ from './FAQ.astro';
 <section id="checkout" class="py-20 bg-slate-100">
   <div class="container mx-auto px-4 max-w-2xl">
     
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden relative">
+      <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-bl-lg shadow-md z-10">
+        -25% OFF
+      </div>
+
       <!-- Header of Checkout -->
       <div class="bg-navy p-6 text-white text-center">
         <h2 class="text-2xl font-bold font-serif">Finalizar Matrícula</h2>
@@ -28,9 +32,9 @@ import FAQ from './FAQ.astro';
               'finance2': 'price_1TkmTBHAnHuL4gEXvyT6ibvA'
             },
             get total() { 
-              if(this.plan === 'full') return 297.00;
-              if(this.plan === 'finance1') return 159.00;
-              if(this.plan === 'finance2') return 115.00;
+              if(this.plan === 'full') return 430.00;
+              if(this.plan === 'finance1') return 220.00;
+              if(this.plan === 'finance2') return 150.00;
             },
             get planName() {
               if(this.plan === 'full') return 'Pago Único';
@@ -46,7 +50,7 @@ import FAQ from './FAQ.astro';
                   fbq('track', 'InitiateCheckout', {
                     value: this.total,
                     currency: 'USD',
-                    content_name: 'Inscripción Máster Wedding Planner',
+                    content_name: 'Inscripción Diplomado Profesional Wedding Planner',
                     content_category: 'Educación',
                     content_ids: [this.plan]
                   });
@@ -96,7 +100,7 @@ import FAQ from './FAQ.astro';
                 </div>
                 <div class="text-right">
                   <p class="font-bold text-emerald-600">
-                    <span class="text-slate-400 line-through text-xs mr-1.5 font-normal">$619 USD</span>$297 USD
+                    <span class="text-slate-400 line-through text-xs mr-1.5 font-normal">$573 USD</span>$430 USD
                   </p>
                 </div>
               </div>
@@ -113,11 +117,11 @@ import FAQ from './FAQ.astro';
                   </div>
                   <div>
                     <p class="font-bold text-navy text-sm">2 Cuotas Mensuales</p>
-                    <p class="text-xs text-slate-500">$159 Inicial + 1 de $159</p>
+                    <p class="text-xs text-slate-500">$220 Inicial + 1 de $220</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <p class="font-bold text-navy">$159 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                  <p class="font-bold text-navy">$220 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
                 </div>
               </div>
             </div>
@@ -133,11 +137,11 @@ import FAQ from './FAQ.astro';
                   </div>
                   <div>
                     <p class="font-bold text-navy text-sm">3 Cuotas Mensuales</p>
-                    <p class="text-xs text-slate-500">$115 Inicial + 2 de $115</p>
+                    <p class="text-xs text-slate-500">$150 Inicial + 2 de $150</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <p class="font-bold text-navy">$115 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                  <p class="font-bold text-navy">$150 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
                 </div>
               </div>
             </div>
@@ -148,7 +152,7 @@ import FAQ from './FAQ.astro';
             <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2">Resumen del Pedido</h3>
             <div class="flex justify-between items-center mb-2">
               <div>
-                <p class="font-medium text-navy">Máster Ejecutivo en Organización de Eventos & Wedding Planner</p>
+                <p class="font-medium text-navy">Diplomado Profesional en Organización de Eventos & Wedding Planning</p>
                 <p class="text-xs text-slate-400" x-text="planName">Pago Único</p>
               </div>
               <div class="text-right">
@@ -159,7 +163,7 @@ import FAQ from './FAQ.astro';
           </div>
 
           <div class="mt-8 pt-6 border-t border-slate-100">
-            <div class="bg-blue-50 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-blue-100 transition-colors" onclick="window.open('https://wa.me/13072923715?text=Hola%2C%20tengo%20problemas%20para%20realizar%20el%20pago%20en%20la%20web%20del%20%2AM%C3%81STER%20EJECUTIVO%20EN%20ORGANIZACI%C3%93N%20DE%20EVENTOS%20%26%20WEDDING%20PLANNER%2A', '_blank')">
+            <div class="bg-blue-50 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-blue-100 transition-colors" onclick="window.open('https://wa.me/13072923715?text=Hola%2C%20tengo%20problemas%20para%20realizar%20el%20pago%20en%20la%20web%20del%20%2ADIPLOMADO%20PROFESIONAL%20EN%20ORGANIZACI%C3%93N%20DE%20EVENTOS%20%26%20WEDDING%20PLANNING%2A', '_blank')">
               <div class="flex items-center gap-3">
                 <div class="bg-white p-2 rounded-full text-blue-600 shadow-sm border border-blue-100 group-hover:scale-110 transition-transform">
                    <HelpCircle class="w-5 h-5" />

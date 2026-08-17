@@ -1,0 +1,70 @@
+---
+import { ArrowDown } from '@lucide/astro';
+---
+
+<section class="pt-10 pb-6 bg-navy text-white relative">
+  <div class="container mx-auto px-4 max-w-5xl">
+    <!-- Sales Pitch Video Container -->
+    <div 
+      x-data="{ 
+        playing: false, 
+        playVideo() { 
+          const v = this.$refs.video; 
+          if(v.paused) { 
+            v.play(); 
+            this.playing = true; 
+          } else { 
+            v.pause(); 
+            this.playing = false; 
+          } 
+        } 
+      }"
+      class="relative w-full max-w-[900px] mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/40 group/player"
+    >
+      <!-- HTML5 Video Player -->
+      <video 
+        id="pitch-video"
+        x-ref="video"
+        @play="playing = true"
+        @pause="playing = false"
+        class="w-full h-auto block" 
+        controls="controls" 
+        controlslist="nodownload" 
+        preload="metadata"
+        playsinline
+        oncontextmenu="return false;"
+      >
+        <source src="https://pub-43479c11d9824c46912d0434d59e3b39.r2.dev/VSL%20%E2%80%94%20Ma%CC%81ster%20en%20Organizacio%CC%81n%20de%20Eventos%20y%20Wedding%20Planner.%20final_1080p.mp4#t=0.001" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+
+      <!-- Centered Play Button Overlay -->
+      <div 
+        x-show="!playing"
+        @click="playVideo()"
+        class="absolute inset-0 flex items-center justify-center bg-black/25 cursor-pointer transition-all duration-300 hover:bg-black/35 z-10"
+      >
+        <button class="w-16 h-16 md:w-22 md:h-22 bg-gold hover:bg-gold-dark text-navy rounded-full flex items-center justify-center shadow-2xl transform transition-transform duration-300 group-hover/player:scale-110 active:scale-95">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8 md:w-11 md:h-11 ml-1 text-navy">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const video = document.getElementById('pitch-video') as HTMLVideoElement | null;
+      if (video) {
+        // Set default playback rate
+        video.defaultPlaybackRate = 1;
+        video.playbackRate = 1;
+        
+        // Ensure playback rate persists when playing
+        video.addEventListener('play', () => {
+          video.playbackRate = 1;
+        });
+      }
+    </script>
+
+  </div>
+</section>

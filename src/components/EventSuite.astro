@@ -1,0 +1,184 @@
+---
+import { 
+  Calculator, 
+  Users, 
+  Briefcase, 
+  Clock, 
+  CheckSquare, 
+  LayoutGrid, 
+  DollarSign, 
+  FileSpreadsheet, 
+  Gift, 
+  Sparkles,
+  ArrowRight
+} from '@lucide/astro';
+---
+
+<section class="pt-4 pb-8 bg-white overflow-hidden relative">
+  <!-- Decorative Background elements -->
+  <div class="absolute top-0 right-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-navy/5 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+  <div class="container mx-auto px-4 max-w-6xl relative z-10">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Column: Copy & Features -->
+      <div class="lg:col-span-7 space-y-8">
+        
+        <!-- Premium Bonus Badge -->
+        <div class="inline-flex items-center gap-2.5 bg-gold/10 text-gold-dark px-4 py-2 rounded-full border border-gold/20 font-semibold text-xs md:text-sm tracking-wide uppercase">
+          <Gift class="w-4.5 h-4.5 animate-bounce shrink-0" />
+          <span>¡Acceso Gratuito Exclusivo!</span>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-3xl md:text-5xl font-serif font-bold text-navy leading-tight">
+            EventSuite PRO: La herramienta definitiva para organizar tus eventos
+          </h2>
+          <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
+            Lleva el control de cada detalle de forma profesional. Olvídate de la desorganización con nuestro software premium de planificación, diseñado por y para Wedding Planners. <strong class="text-navy font-semibold">Incluido 100% gratis con tu inscripción al Curso.</strong>
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          
+          <!-- Feature 1 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <Calculator class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Presupuestos Inteligentes</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Control de costos, presupuestos y honorarios en tiempo real.</p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <Users class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Control de Invitados</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Monitorea confirmaciones, requerimientos especiales y asignación de mesas.</p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <Briefcase class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Gestión de Proveedores</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Directorio de contactos, estado de contratos y control de pagos pendientes.</p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <Clock class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Cronogramas Minuto a Minuto</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Estructura los tiempos el día del evento de forma milimétrica.</p>
+            </div>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <CheckSquare class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Gestor de Tareas</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Crea listas de pendientes con prioridades para que nada se te pase.</p>
+            </div>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <LayoutGrid class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Distribución de Sitios y Mesas</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Planimetría digital básica para organizar a los invitados en cada espacio.</p>
+            </div>
+          </div>
+
+          <!-- Feature 7 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+            <div class="w-10 h-10 bg-navy/5 text-navy rounded-lg flex items-center justify-center shrink-0">
+              <DollarSign class="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h4 class="font-bold text-navy text-sm md:text-base">Pagos y Honorarios</h4>
+              <p class="text-xs md:text-sm text-slate-500 mt-1">Administra tus cobros de organizador y los abonos de los clientes.</p>
+            </div>
+          </div>
+
+          <!-- Feature 8 -->
+          <div class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 bg-emerald-50/20 border-emerald-100/50 hover:bg-emerald-50/50">
+            <div class="w-10 h-10 bg-emerald-500/10 text-emerald-600 rounded-lg flex items-center justify-center shrink-0">
+              <FileSpreadsheet class="w-5 h-5 text-emerald-600" />
+            </div>
+            <div>
+              <h4 class="font-bold text-emerald-800 text-sm md:text-base">Exportación Inteligente a Excel</h4>
+              <p class="text-xs md:text-sm text-emerald-700/80 mt-1">Genera reportes ejecutivos completos y expórtalos a Excel (.xlsx) con un clic.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Column: Visual Mockup -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-[400px] lg:max-w-none group">
+          <!-- Soft glow effect -->
+          <div class="absolute -inset-1.5 bg-gradient-to-r from-gold to-gold-dark rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          
+          <!-- Image Frame -->
+          <div class="relative bg-navy rounded-3xl p-3 shadow-2xl border border-white/10 overflow-hidden">
+            <img 
+              src="/images/eventsuite.webp" 
+              alt="Interfaz de EventSuite PRO para organización de bodas y eventos" 
+              class="w-full h-auto object-contain rounded-2xl"
+              loading="lazy"
+            />
+            
+            <!-- Floating overlay item -->
+            <div class="absolute bottom-6 left-6 right-6 bg-navy/90 backdrop-blur border border-white/10 p-4 rounded-2xl flex items-center gap-3.5 shadow-lg">
+              <div class="bg-gold p-2 rounded-xl text-navy shrink-0">
+                <Sparkles class="w-5 h-5 animate-pulse" />
+              </div>
+              <div class="text-left">
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Herramienta Incluida</p>
+                <p class="text-xs md:text-sm font-bold text-white leading-tight mt-0.5">Acceso Ilimitado Sin Costo Mensual</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Centered CTA Button -->
+    <div class="mt-14 text-center flex flex-col items-center justify-center">
+      <button 
+        onclick="document.getElementById('checkout') ? document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' }) : window.location.href = '/inscripcion'"
+        class="group relative inline-flex items-center justify-center gap-2 md:gap-3 bg-gradient-to-r from-navy to-navy-light hover:from-navy-light hover:to-navy text-white font-bold text-xs md:text-lg px-5 py-3 md:px-12 md:py-5 rounded-xl shadow-xl shadow-navy/25 hover:shadow-2xl hover:shadow-navy/40 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+      >
+        <span class="whitespace-nowrap">Inscribirme al Curso y Obtener EventSuite Gratis</span>
+        <ArrowRight class="w-3.5 h-3.5 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+      </button>
+      <p class="text-slate-500 text-xs md:text-sm mt-3.5 font-medium flex items-center gap-1.5 justify-center">
+        <span>🎁 Regalo exclusivo: Acceso de por vida incluido con tu matrícula</span>
+      </p>
+    </div>
+
+  </div>
+</section>

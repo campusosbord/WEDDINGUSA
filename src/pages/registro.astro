@@ -26,7 +26,7 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
             </div>
             <h2 class="text-2xl md:text-3xl font-bold font-serif">¡Pago Realizado!</h2>
             <p class="text-slate-300 text-sm max-w-md mx-auto">
-              Tu matrícula para el Máster Ejecutivo en Organización de Eventos & Wedding Planner ha sido procesada con éxito.
+              Tu matrícula para el Diplomado Profesional en Organización de Eventos & Wedding Planning ha sido procesada con éxito.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
                   console.error('[Google Sheets] Error al registrar datos:', e);
                 }
                 
-                const message = `Hola, acabo de realizar mi pago para el *MÁSTER EJECUTIVO EN ORGANIZACIÓN DE EVENTOS & WEDDING PLANNER* y quiero completar mi registro.\n\n` +
+                const message = `Hola, acabo de realizar mi pago para el *DIPLOMADO PROFESIONAL EN ORGANIZACIÓN DE EVENTOS & WEDDING PLANNING* y quiero completar mi registro.\n\n` +
                                 `*DATOS DEL ESTUDIANTE:*\n` +
                                 `• *Nombre completo:* ${this.nombre.trim()}\n` +
                                 `• *Correo electrónico:* ${this.email.trim()}\n` +
@@ -239,7 +239,7 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
           fbq('track', 'Purchase', {
             value: value,
             currency: 'USD',
-            content_name: 'Inscripción Máster Wedding Planner',
+            content_name: 'Inscripción Diplomado Profesional Wedding Planner',
             content_category: 'Educación',
             content_ids: [plan],
             content_type: 'product'
@@ -257,7 +257,7 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
             currency: 'USD',
             items: [{
               item_id: `wedding_planner_${plan}`,
-              item_name: `Inscripción Máster Wedding Planner (${planFriendlyName})`,
+              item_name: `Inscripción Diplomado Profesional Wedding Planner (${planFriendlyName})`,
               price: value,
               quantity: 1,
               item_category: 'Educación'

@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
         ],
         mode: 'payment',
         success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=full`,
-        cancel_url: `${origin}/checkout`,
+        cancel_url: `${origin}/inscripcion`,
       };
     } else if (plan === 'finance1') {
       // 2 cuotas de $159
@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
           },
         },
         success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=finance1`,
-        cancel_url: `${origin}/checkout`,
+        cancel_url: `${origin}/inscripcion`,
       };
     } else if (plan === 'finance2') {
       // 3 cuotas de $115
@@ -77,7 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
           },
         },
         success_url: `${origin}/registro?session_id={CHECKOUT_SESSION_ID}&plan=finance2`,
-        cancel_url: `${origin}/checkout`,
+        cancel_url: `${origin}/inscripcion`,
       };
     } else {
       return new Response(JSON.stringify({ error: 'Plan inválido.' }), {

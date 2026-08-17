@@ -12,9 +12,9 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Máster Ejecutivo en Organización de Eventos & Wedding Planner - Instituto Osbord" } = Astro.props;
+const { title, description = "Diplomado Profesional en Organización de Eventos & Wedding Planning - Instituto Osbord" } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
-const isCheckout = pathname === '/checkout' || pathname === '/checkout/' || pathname === '/registro' || pathname === '/registro/'; // Normalize check
+const isCheckout = pathname === '/inscripcion' || pathname === '/inscripcion/' || pathname === '/registro' || pathname === '/registro/'; // Normalize check
 ---
 
 <!doctype html>
@@ -112,8 +112,8 @@ const isCheckout = pathname === '/checkout' || pathname === '/checkout/' || path
 					currency: 'USD',
 					value: 297.00,
 					items: [{
-						item_id: 'master_wedding_planner',
-						item_name: 'Inscripción Máster Wedding Planner',
+						item_id: 'diplomado_wedding_planner',
+						item_name: 'Inscripción Diplomado Profesional Wedding Planner',
 						item_category: 'Educación',
 						price: 297.00,
 						quantity: 1

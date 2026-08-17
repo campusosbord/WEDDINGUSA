@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock } from '@lucide/astro';
+import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock, Users } from '@lucide/astro';
 import heroImage from '../images/wedding-hero.webp';
 ---
 
@@ -32,11 +32,11 @@ import heroImage from '../images/wedding-hero.webp';
       </div>
       
       <h1 class="text-2xl md:text-4xl lg:text-6xl font-bold font-serif leading-tight">
-        Máster Ejecutivo en Organización de Eventos & Wedding Planner
+        Diplomado Profesional en Organización de Eventos & Wedding Planning
       </h1>
       
       <p class="text-lg md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 max-w-lg mx-auto md:mx-0 drop-shadow-sm pb-1">
-        Convierte tu Pasión en un <span class="text-gold italic font-bold">Negocio Rentable</span> con Aval Americano. Domina el arte de crear experiencias inolvidables.
+        Convierte tu Pasión en un <span class="text-gold italic font-bold">Negocio Rentable</span> con Beca de Idiomas Incluida. Domina el arte de crear experiencias inolvidables.
       </p>
 
       <!-- Trust Badges -->
@@ -44,8 +44,8 @@ import heroImage from '../images/wedding-hero.webp';
         <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10">
           <BadgeCheck class="text-blue-400 w-6 h-6 shrink-0" />
           <div class="text-left">
-            <p class="text-[10px] text-slate-400 uppercase tracking-wider">Aval</p>
-            <p class="font-semibold text-[11px] md:text-sm">Internacional EE.UU 🇺🇸</p>
+            <p class="text-[10px] text-slate-400 uppercase tracking-wider">Beneficio</p>
+            <p class="font-semibold text-[11px] md:text-sm">Beca de Idiomas 🌐</p>
           </div>
         </div>
         <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10">
@@ -64,8 +64,8 @@ import heroImage from '../images/wedding-hero.webp';
         </div>
       </div>
       
-      <!-- Duration & Flexibility Info -->
-      <div class="flex flex-nowrap gap-2 md:gap-3 pt-2 justify-center md:justify-start overflow-visible">
+      <!-- Duration, Flexibility & Providers Info -->
+      <div class="flex flex-wrap gap-2 md:gap-3 pt-2 justify-center md:justify-start">
         <div class="inline-flex items-center gap-1.5 md:gap-2 bg-emerald-500/20 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-emerald-400/30 flex-shrink-0">
           <Timer class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" />
           <span class="text-[10px] md:text-sm font-semibold text-white">Duración: <span class="text-emerald-300">3 Meses</span></span>
@@ -74,18 +74,22 @@ import heroImage from '../images/wedding-hero.webp';
           <Clock class="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-400" />
           <span class="text-[10px] md:text-sm font-semibold text-white">Horarios <span class="text-blue-300">Flexibles</span></span>
         </div>
+        <div class="inline-flex items-center gap-1.5 md:gap-2 bg-amber-500/20 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-amber-400/30 flex-shrink-0">
+          <Users class="w-3.5 h-3.5 md:w-4 md:h-4 text-amber-400" />
+          <span class="text-[10px] md:text-sm font-semibold text-white">Lista de <span class="text-amber-300">Proveedores 📋</span></span>
+        </div>
       </div>
     </div>
 
     <!-- Right Column: Offer Box -->
     <div 
       x-data="{ 
-        prices: { full: 297, optA: 159, optB: 115 }
+        prices: { full: 430, optA: 220, optB: 150 }
       }"
       class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-gold/30 relative overflow-hidden transform hover:scale-105 transition-transform duration-300"
     >
       <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-        -52% OFF
+        -25% OFF
       </div>
 
       <div class="text-center space-y-4">
@@ -98,7 +102,7 @@ import heroImage from '../images/wedding-hero.webp';
           <div class="bg-navy-light/10 p-4 rounded-lg border border-navy/10 relative overflow-hidden">
              <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Inscripción Regular (Único Pago)</p>
              <p class="text-4xl font-bold text-navy font-serif">
-               <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$619</span>$297 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
+               <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$573</span>$430 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
              </p>
           </div>
 
@@ -111,7 +115,7 @@ import heroImage from '../images/wedding-hero.webp';
                 <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción A (2 Cuotas)</p>
                 <div class="flex items-baseline justify-center gap-0.5">
                   <span class="text-sm text-navy font-bold">$</span>
-                  <span class="text-2xl font-bold text-navy font-serif">159</span>
+                  <span class="text-2xl font-bold text-navy font-serif">220</span>
                 </div>
                 <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
               </div>
@@ -119,13 +123,11 @@ import heroImage from '../images/wedding-hero.webp';
                 <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción B (3 Cuotas)</p>
                 <div class="flex items-baseline justify-center gap-0.5">
                   <span class="text-sm text-navy font-bold">$</span>
-                  <span class="text-2xl font-bold text-navy font-serif">115</span>
+                  <span class="text-2xl font-bold text-navy font-serif">150</span>
                 </div>
                 <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
               </div>
             </div>
-            
-            <!-- Elegant BCV Rate Display Removed -->
           </div>
         </div>
 
@@ -154,7 +156,7 @@ import heroImage from '../images/wedding-hero.webp';
           </div>
         </div>
 
-        <a href="/checkout" onclick="trackInitiateCheckout()" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all mt-6 uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
+        <a href="/inscripcion" onclick="trackInitiateCheckout()" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all mt-6 uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
           ¡Inscribirme Ahora!
         </a>
 
