@@ -40,7 +40,7 @@ export const POST: APIRoute = async ({ request }) => {
         cancel_url: `${origin}/inscripcion`,
       };
     } else if (plan === 'finance1') {
-      // 2 cuotas de $159
+      // 2 cuotas de $235
       sessionConfig = {
         payment_method_types: ['card'],
         ...(email ? { customer_email: email } : {}),
@@ -60,7 +60,7 @@ export const POST: APIRoute = async ({ request }) => {
         cancel_url: `${origin}/inscripcion`,
       };
     } else if (plan === 'finance2') {
-      // 3 cuotas de $115
+      // 3 cuotas de $165
       sessionConfig = {
         payment_method_types: ['card'],
         ...(email ? { customer_email: email } : {}),

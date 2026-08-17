@@ -41,11 +41,11 @@ export const POST: APIRoute = async ({ request }) => {
   //   - financiamiento-2: Precio recurrente mensual × 2 cuotas
   //   - financiamiento-3: Precio recurrente mensual × 3 cuotas
   //
-  // Ejemplo plan 2 cuotas ($159/mes):
+  // Ejemplo plan 2 cuotas ($235/mes):
   //   Cuota 1: Día 0 (al pagar) → Cuota 2: +1 mes (última)
   //   duration = 2 meses → Stripe cancela al final del mes 2. ✅
   //
-  // Ejemplo plan 3 cuotas ($115/mes):
+  // Ejemplo plan 3 cuotas ($165/mes):
   //   Cuota 1: Día 0 → Cuota 2: +1 mes → Cuota 3: +2 meses (última)
   //   duration = 3 meses → Stripe cancela al final del mes 3. ✅
   // ─────────────────────────────────────────────────────────────────────────

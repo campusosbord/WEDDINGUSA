@@ -65,8 +65,8 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
                 const planParam = params.get('plan');
                 let planName = 'Plan de Pago (Confirmar con soporte)';
                 if (planParam === 'full') planName = 'Pago Único ($297 USD)';
-                if (planParam === 'finance1') planName = 'Financiamiento de 2 Cuotas ($159 USD)';
-                if (planParam === 'finance2') planName = 'Financiamiento de 3 Cuotas ($115 USD)';
+                if (planParam === 'finance1') planName = 'Financiamiento de 2 Cuotas ($235 USD)';
+                if (planParam === 'finance2') planName = 'Financiamiento de 3 Cuotas ($165 USD)';
                 
                 // Enviar datos a Google Sheets (Ruta: weddingusa)
                 const payload = JSON.stringify({
@@ -220,10 +220,10 @@ import { CheckCircle, ShieldCheck, User, Mail, FileText, Phone } from '@lucide/a
         let value = 297.00;
         let planFriendlyName = 'Pago Único';
         if (plan === 'finance1') {
-          value = 159.00;
+          value = 235.00;
           planFriendlyName = '2 Cuotas Mensuales';
         } else if (plan === 'finance2') {
-          value = 115.00;
+          value = 165.00;
           planFriendlyName = '3 Cuotas Mensuales';
         }
 
