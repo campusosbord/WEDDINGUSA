@@ -2,7 +2,7 @@
 import { ArrowDown } from '@lucide/astro';
 ---
 
-<section class="pt-10 pb-6 bg-navy text-white relative">
+<section id="video-section" class="pt-12 pb-16 bg-navy text-white relative">
   <div class="container mx-auto px-4 max-w-5xl">
     <!-- Sales Pitch Video Container -->
     <div 
@@ -52,6 +52,114 @@ import { ArrowDown } from '@lucide/astro';
       </div>
     </div>
 
+    <!-- Price / Offer Module After VSL Video -->
+    <div class="mt-12 max-w-xl mx-auto">
+      <div 
+        x-data="{ 
+          prices: { full: 430, optA: 235, optB: 165 }
+        }"
+        class="bg-white text-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-gold/30 relative overflow-hidden transform hover:scale-[1.01] transition-transform duration-300"
+      >
+        <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+          -25% OFF
+        </div>
+
+        <div class="text-center space-y-4">
+          <h3 class="text-navy font-bold uppercase tracking-widest text-sm border-b pb-2 mb-4">
+            Oferta Cierre de Grupo
+          </h3>
+
+          <div class="space-y-3 font-sans">
+            <!-- Option 1: Full Payment -->
+            <div class="bg-navy-light/10 p-4 rounded-lg border border-navy/10 relative overflow-hidden">
+               <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Inscripción Regular (Único Pago)</p>
+               <p class="text-4xl font-bold text-navy font-serif">
+                 <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$573</span>$430 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
+               </p>
+            </div>
+
+            <!-- Financing Options -->
+            <div class="bg-white p-3 rounded-lg border border-slate-200">
+              <p class="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mb-3 border-b border-slate-100 pb-1">Financiamiento Especial</p>
+              
+              <div class="grid grid-cols-2 gap-3">
+                <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
+                  <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción A (2 Cuotas)</p>
+                  <div class="flex items-baseline justify-center gap-0.5">
+                    <span class="text-sm text-navy font-bold">$</span>
+                    <span class="text-2xl font-bold text-navy font-serif">235</span>
+                  </div>
+                  <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
+                </div>
+                <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
+                  <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción B (3 Cuotas)</p>
+                  <div class="flex items-baseline justify-center gap-0.5">
+                    <span class="text-sm text-navy font-bold">$</span>
+                    <span class="text-2xl font-bold text-navy font-serif">165</span>
+                  </div>
+                  <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Evergreen Countdown -->
+          <div 
+            x-data="countdownTimer()"
+            x-init="initTimer()"
+            class="bg-navy text-white rounded-xl p-4 mt-4 shadow-inner"
+          >
+            <p class="text-[10px] text-center mb-2 text-slate-400 uppercase tracking-widest">Inscripciones abiertas hasta:</p>
+            <div class="flex justify-center gap-4 text-center font-mono">
+               <div>
+                 <span class="text-2xl font-bold text-gold" x-text="format(hours)">47</span>
+                 <p class="text-[9px] uppercase text-slate-400">Horas</p>
+               </div>
+               <span class="text-2xl text-slate-600">:</span>
+               <div>
+                 <span class="text-2xl font-bold text-gold" x-text="format(minutes)">59</span>
+                 <p class="text-[9px] uppercase text-slate-400">Min</p>
+               </div>
+               <span class="text-2xl text-slate-600">:</span>
+               <div>
+                 <span class="text-2xl font-bold text-gold" x-text="format(seconds)">59</span>
+                 <p class="text-[9px] uppercase text-slate-400">Seg</p>
+               </div>
+            </div>
+          </div>
+
+          <a href="/inscripcion" onclick="trackInitiateCheckout()" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all mt-6 uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
+            ¡Inscribirme Ahora!
+          </a>
+
+          <!-- Payment Methods -->
+          <div class="mt-6 pt-6 border-t border-slate-100">
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-3">Paga seguro con:</p>
+            <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-all duration-500">
+              <span class="text-lg font-bold text-navy">Stripe</span>
+              <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-slate-500 text-[9px] md:text-[10px] font-bold text-center">
+                <span>💳 Tarjetas</span>
+                <span>•</span>
+                <span>📱 Apple Pay</span>
+                <span>•</span>
+                <span>🔗 Link</span>
+                <span>•</span>
+                <span>🛒 Amazon Pay</span>
+                <span>•</span>
+                <span>💸 Cash App Pay</span>
+                <span>•</span>
+                <span>🏦 Transferencia Bancaria</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-xs text-center text-slate-400 mt-4">
+            <span class="text-emerald-500">🔒 Pago Seguro.</span> Acceso inmediato al Campus Online.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <script>
       const video = document.getElementById('pitch-video') as HTMLVideoElement | null;
       if (video) {
@@ -64,7 +172,64 @@ import { ArrowDown } from '@lucide/astro';
           video.playbackRate = 1;
         });
       }
+
+      // Alpine.js countdown timer definition
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('countdownTimer', () => ({
+          hours: 48,
+          minutes: 0,
+          seconds: 0,
+          totalSeconds: 48 * 3600,
+          
+          initTimer() {
+            const storedTime = localStorage.getItem('osbord_wedding_timer');
+            const now = new Date().getTime();
+            
+            if (storedTime) {
+              const { expiry } = JSON.parse(storedTime);
+              const remaining = Math.max(0, Math.floor((expiry - now) / 1000));
+              
+              if (remaining === 0) {
+                this.resetTimer();
+              } else {
+                this.totalSeconds = remaining;
+              }
+            } else {
+              this.resetTimer();
+            }
+
+            this.updateDisplay();
+            
+            setInterval(() => {
+              if (this.totalSeconds > 0) {
+                this.totalSeconds--;
+                this.updateDisplay();
+              } else {
+                this.resetTimer(); // Loop for evergreen effect
+              }
+            }, 1000);
+          },
+
+          resetTimer() {
+            const now = new Date().getTime();
+            const expiry = now + (48 * 3600 * 1000);
+            localStorage.setItem('osbord_wedding_timer', JSON.stringify({ expiry }));
+            this.totalSeconds = 48 * 3600;
+          },
+
+          updateDisplay() {
+            this.hours = Math.floor(this.totalSeconds / 3600);
+            this.minutes = Math.floor((this.totalSeconds % 3600) / 60);
+            this.seconds = this.totalSeconds % 60;
+          },
+          
+          format(val: number) {
+            return val.toString().padStart(2, '0');
+          }
+        }));
+      });
     </script>
 
   </div>
 </section>
+

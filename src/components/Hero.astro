@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock, Users } from '@lucide/astro';
+import { BadgeCheck, Briefcase, GraduationCap, Timer, Clock, Users, Play } from '@lucide/astro';
 import heroImage from '../images/wedding-hero.webp';
 ---
 
-<section class="relative min-h-screen flex items-center justify-center pt-20 pb-12 overflow-hidden">
+<section class="relative min-h-screen flex items-start md:items-center justify-center pt-18 md:pt-28 pb-12 md:pb-16 overflow-hidden">
   <!-- Dynamic Background with Overlay -->
   <div class="absolute inset-0 z-0">
     <Image 
@@ -22,42 +22,42 @@ import heroImage from '../images/wedding-hero.webp';
     <div class="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent"></div>
   </div>
 
-  <div class="container mx-auto px-4 relative z-10 grid md:grid-cols-2 gap-12 items-center max-w-6xl">
-    <!-- Left Column: Copy -->
-    <div class="text-white space-y-6 text-center md:text-left mt-8 md:mt-0">
-      <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+  <div class="container mx-auto px-4 relative z-10 max-w-4xl text-center">
+    <!-- Copy -->
+    <div class="text-white space-y-5 md:space-y-6 mt-1 md:mt-0">
+      <div class="flex flex-wrap gap-2 justify-center">
         <div class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur px-3 md:px-4 py-1 rounded-full border border-white/20 text-xs md:text-sm font-medium text-gold-light">
           <span class="animate-pulse text-[10px] md:text-xs">●</span> Cupos Limitados
         </div>
       </div>
       
-      <h1 class="text-2xl md:text-4xl lg:text-6xl font-bold font-serif leading-tight">
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold font-serif leading-tight max-w-3xl mx-auto">
         Diplomado Profesional en Organización de Eventos & Wedding Planning
       </h1>
       
-      <p class="text-lg md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 max-w-lg mx-auto md:mx-0 drop-shadow-sm pb-1">
+      <p class="text-lg md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 max-w-2xl mx-auto drop-shadow-sm pb-1">
         Convierte tu Pasión en un <span class="text-gold italic font-bold">Negocio Rentable</span> con Beca de Idiomas Incluida. Domina el arte de crear experiencias inolvidables.
       </p>
 
       <!-- Trust Badges -->
-      <div class="flex flex-col md:flex-row gap-4 pt-4 justify-center md:justify-start">
-        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10">
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10 text-left">
           <BadgeCheck class="text-blue-400 w-6 h-6 shrink-0" />
-          <div class="text-left">
+          <div>
             <p class="text-[10px] text-slate-400 uppercase tracking-wider">Beneficio</p>
             <p class="font-semibold text-[11px] md:text-sm">Beca de Idiomas 🌐</p>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10">
+        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10 text-left">
           <Briefcase class="text-emerald-400 w-6 h-6 shrink-0" />
-          <div class="text-left">
+          <div>
             <p class="text-[10px] text-slate-400 uppercase tracking-wider">Bolsa de</p>
             <p class="font-semibold text-[11px] md:text-sm">Empleo Garantizada</p>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10">
+        <div class="flex items-center gap-3 bg-navy-light/50 p-3 rounded-lg border border-white/10 text-left">
           <GraduationCap class="text-gold w-6 h-6 shrink-0" />
-          <div class="text-left">
+          <div>
             <p class="text-[10px] text-slate-400 uppercase tracking-wider">Clases</p>
             <p class="font-semibold text-[11px] md:text-sm">100% Online + Tutores</p>
           </div>
@@ -65,7 +65,7 @@ import heroImage from '../images/wedding-hero.webp';
       </div>
       
       <!-- Duration, Flexibility & Providers Info -->
-      <div class="flex flex-wrap gap-2 md:gap-3 pt-2 justify-center md:justify-start">
+      <div class="flex flex-wrap gap-2 md:gap-3 pt-2 justify-center">
         <div class="inline-flex items-center gap-1.5 md:gap-2 bg-emerald-500/20 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-emerald-400/30 flex-shrink-0">
           <Timer class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" />
           <span class="text-[10px] md:text-sm font-semibold text-white">Duración: <span class="text-emerald-300">3 Meses</span></span>
@@ -79,180 +79,17 @@ import heroImage from '../images/wedding-hero.webp';
           <span class="text-[10px] md:text-sm font-semibold text-white">Lista de <span class="text-amber-300">Proveedores 📋</span></span>
         </div>
       </div>
-    </div>
 
-    <!-- Right Column: Offer Box -->
-    <div 
-      x-data="{ 
-        prices: { full: 430, optA: 235, optB: 165 }
-      }"
-      class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-gold/30 relative overflow-hidden transform hover:scale-105 transition-transform duration-300"
-    >
-      <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-        -25% OFF
-      </div>
-
-      <div class="text-center space-y-4">
-        <h3 class="text-navy-light font-bold uppercase tracking-widest text-sm border-b pb-2 mb-4">
-          Oferta Cierre de Grupo
-        </h3>
-
-        <div class="space-y-3 font-sans">
-          <!-- Option 1: Full Payment -->
-          <div class="bg-navy-light/10 p-4 rounded-lg border border-navy/10 relative overflow-hidden">
-             <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Inscripción Regular (Único Pago)</p>
-             <p class="text-4xl font-bold text-navy font-serif">
-               <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$573</span>$430 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
-             </p>
-          </div>
-
-          <!-- Financing Options -->
-          <div class="bg-white p-3 rounded-lg border border-slate-200">
-            <p class="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mb-3 border-b border-slate-100 pb-1">Financiamiento Especial</p>
-            
-            <div class="grid grid-cols-2 gap-3">
-              <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
-                <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción A (2 Cuotas)</p>
-                <div class="flex items-baseline justify-center gap-0.5">
-                  <span class="text-sm text-navy font-bold">$</span>
-                  <span class="text-2xl font-bold text-navy font-serif">235</span>
-                </div>
-                <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
-              </div>
-              <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
-                <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción B (3 Cuotas)</p>
-                <div class="flex items-baseline justify-center gap-0.5">
-                  <span class="text-sm text-navy font-bold">$</span>
-                  <span class="text-2xl font-bold text-navy font-serif">165</span>
-                </div>
-                <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Evergreen Countdown -->
-        <div 
-          x-data="countdownTimer()"
-          x-init="initTimer()"
-          class="bg-navy rounded-xl p-4 mt-4 shadow-inner"
+      <!-- CTA link to video section -->
+      <div class="pt-6 flex justify-center">
+        <a 
+          href="#video-section" 
+          class="inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-navy font-bold px-6 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
         >
-          <p class="text-[10px] text-center mb-2 text-slate-400 uppercase tracking-widest">Inscripciones abiertas hasta:</p>
-          <div class="flex justify-center gap-4 text-center font-mono">
-             <div>
-               <span class="text-2xl font-bold text-gold" x-text="format(hours)">47</span>
-               <p class="text-[9px] uppercase text-slate-500">Horas</p>
-             </div>
-             <span class="text-2xl text-slate-700">:</span>
-             <div>
-               <span class="text-2xl font-bold text-gold" x-text="format(minutes)">59</span>
-               <p class="text-[9px] uppercase text-slate-500">Min</p>
-             </div>
-             <span class="text-2xl text-slate-700">:</span>
-             <div>
-               <span class="text-2xl font-bold text-gold" x-text="format(seconds)">59</span>
-               <p class="text-[9px] uppercase text-slate-500">Seg</p>
-             </div>
-          </div>
-        </div>
-
-        <a href="/inscripcion" onclick="trackInitiateCheckout()" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all mt-6 uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
-          ¡Inscribirme Ahora!
+          <Play class="w-4 h-4 fill-navy text-navy" />
+          <span>Ver Video y Oferta Especial</span>
         </a>
-
-        <!-- Payment Methods -->
-        <div class="mt-6 pt-6 border-t border-slate-100">
-          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-3">Paga seguro con:</p>
-          <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-all duration-500">
-            <span class="text-lg font-bold text-navy">Stripe</span>
-            <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-slate-500 text-[9px] md:text-[10px] font-bold text-center">
-              <span>💳 Tarjetas</span>
-              <span>•</span>
-              <span>📱 Apple Pay</span>
-              <span>•</span>
-              <span>🔗 Link</span>
-              <span>•</span>
-              <span>🛒 Amazon Pay</span>
-              <span>•</span>
-              <span>💸 Cash App Pay</span>
-              <span>•</span>
-              <span>🏦 Transferencia Bancaria</span>
-            </div>
-          </div>
-        </div>
-        
-        <p class="text-xs text-center text-slate-400 mt-4">
-          <span class="text-emerald-500">🔒 Pago Seguro.</span> Acceso inmediato al Campus Online.
-        </p>
       </div>
     </div>
   </div>
 </section>
-
-<script>
-  // Alpine.js component definition (global scope for simplicity in Astro)
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('countdownTimer', () => ({
-      hours: 48,
-      minutes: 0,
-      seconds: 0,
-      totalSeconds: 48 * 3600,
-      
-      initTimer() {
-        const storedTime = localStorage.getItem('osbord_wedding_timer');
-        const now = new Date().getTime();
-        
-        if (storedTime) {
-          const { expiry } = JSON.parse(storedTime);
-          const remaining = Math.max(0, Math.floor((expiry - now) / 1000));
-          
-          if (remaining === 0) {
-            this.resetTimer();
-          } else {
-            this.totalSeconds = remaining;
-          }
-        } else {
-          this.resetTimer();
-        }
-
-        this.updateDisplay();
-        
-        setInterval(() => {
-          if (this.totalSeconds > 0) {
-            this.totalSeconds--;
-            this.updateDisplay();
-          } else {
-            this.resetTimer(); // Loop for evergreen effect
-          }
-        }, 1000);
-      },
-
-      resetTimer() {
-        const now = new Date().getTime();
-        const expiry = now + (48 * 3600 * 1000);
-        localStorage.setItem('osbord_wedding_timer', JSON.stringify({ expiry }));
-        this.totalSeconds = 48 * 3600;
-      },
-
-      updateDisplay() {
-        this.hours = Math.floor(this.totalSeconds / 3600);
-        this.minutes = Math.floor((this.totalSeconds % 3600) / 60);
-        this.seconds = this.totalSeconds % 60;
-      },
-      
-      format(val) {
-        return val.toString().padStart(2, '0');
-      }
-    }));
-  });
-</script>
-
-<style>
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); filter: brightness(100%); }
-    50% { transform: scale(1.03); filter: brightness(110%); }
-  }
-  .animate-heartbeat {
-    animation: heartbeat 2s infinite ease-in-out;
-  }
-</style>
