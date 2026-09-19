@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description = "Diplomado Profesional en Organización de Eventos & Wedding Planning - Instituto Osbord" } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
-const isCheckout = pathname === '/inscripcion' || pathname === '/inscripcion/' || pathname === '/registro' || pathname === '/registro/'; // Normalize check
+const isCheckout = pathname.startsWith('/inscripcion') || pathname.startsWith('/registro') || pathname.startsWith('/formulario');
 ---
 
 <!doctype html>

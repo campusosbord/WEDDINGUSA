@@ -56,7 +56,7 @@ import { ArrowDown } from '@lucide/astro';
     <div class="mt-12 max-w-xl mx-auto">
       <div 
         x-data="{ 
-          prices: { full: 430, optA: 235, optB: 165 }
+          prices: { full: 297, optA: 148.5, optB: 99 }
         }"
         class="bg-white text-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-gold/30 relative overflow-hidden transform hover:scale-[1.01] transition-transform duration-300"
       >
@@ -74,36 +74,37 @@ import { ArrowDown } from '@lucide/astro';
             <div class="bg-navy-light/10 p-4 rounded-lg border border-navy/10 relative overflow-hidden">
                <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Inscripción Regular (Único Pago)</p>
                <p class="text-4xl font-bold text-navy font-serif">
-                 <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$573</span>$430 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
+                 <span class="text-2xl text-slate-400 line-through mr-2 font-sans font-normal">$396</span>$297 <span class="text-lg text-slate-400 font-sans font-normal">USD</span>
                </p>
             </div>
 
             <!-- Financing Options -->
             <div class="bg-white p-3 rounded-lg border border-slate-200">
-              <p class="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mb-3 border-b border-slate-100 pb-1">Financiamiento Especial</p>
+              <p class="text-[10px] text-center text-emerald-600 font-bold uppercase tracking-widest mb-3 border-b border-slate-100 pb-1">✨ Financiamiento sin interés</p>
               
               <div class="grid grid-cols-2 gap-3">
                 <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
                   <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción A (2 Cuotas)</p>
                   <div class="flex items-baseline justify-center gap-0.5">
                     <span class="text-sm text-navy font-bold">$</span>
-                    <span class="text-2xl font-bold text-navy font-serif">235</span>
+                    <span class="text-2xl font-bold text-navy font-serif">148,5</span>
                   </div>
-                  <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
+                  <p class="text-[9px] text-emerald-600 font-medium leading-tight mb-2">Sin interés / mes</p>
                 </div>
                 <div class="text-center p-3 bg-slate-50 rounded-xl border border-slate-100 shadow-inner">
                   <p class="text-[10px] text-slate-400 uppercase font-bold mb-1">Opción B (3 Cuotas)</p>
                   <div class="flex items-baseline justify-center gap-0.5">
                     <span class="text-sm text-navy font-bold">$</span>
-                    <span class="text-2xl font-bold text-navy font-serif">165</span>
+                    <span class="text-2xl font-bold text-navy font-serif">99</span>
                   </div>
-                  <p class="text-[9px] text-slate-500 leading-tight mb-2">Cuota Inicial</p>
+                  <p class="text-[9px] text-emerald-600 font-medium leading-tight mb-2">Sin interés / mes</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Evergreen Countdown -->
+          <!-- Evergreen Countdown (Oculto temporalmente, preservado para uso futuro) -->
+          <!--
           <div 
             x-data="countdownTimer()"
             x-init="initTimer()"
@@ -127,6 +128,7 @@ import { ArrowDown } from '@lucide/astro';
                </div>
             </div>
           </div>
+          -->
 
           <a href="/inscripcion" onclick="trackInitiateCheckout()" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all mt-6 uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
             ¡Inscribirme Ahora!

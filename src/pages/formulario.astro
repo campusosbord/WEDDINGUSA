@@ -1,0 +1,272 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } from '@lucide/astro';
+---
+
+<Layout 
+  title="🎁 Checklist Gratis para Organizar Bodas | Instituto Osbord"
+  description="Déjanos tus datos para recibir el Checklist de Wedding Planner directo en tu correo y conocer de inmediato todos los detalles del Diplomado Profesional."
+>
+  <Header />
+
+  <main class="pt-20 sm:pt-24 pb-12 sm:pb-16 min-h-screen bg-slate-100 flex items-center justify-center px-3 sm:px-4">
+    <div class="w-full max-w-lg mx-auto">
+      <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+
+        <!-- Header Hero (Mobile First) -->
+        <div class="bg-navy px-5 py-6 sm:p-8 text-white text-center relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-white/5 rounded-full pointer-events-none"></div>
+
+          <div class="relative z-10 space-y-2.5">
+            <div class="inline-flex items-center gap-1.5 bg-gold/20 text-gold px-3 py-1 rounded-full border border-gold/30 text-xs font-semibold tracking-wide uppercase">
+              <Gift class="w-3.5 h-3.5" />
+              <span>Recurso 100% Gratuito</span>
+            </div>
+            
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold font-serif leading-tight">
+              Obtén tu Checklist Profesional para Organizar Bodas
+            </h1>
+
+            <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+              La guía definitiva paso a paso con las etapas clave para coordinar una boda sin pasar nada por alto.
+            </p>
+          </div>
+        </div>
+
+        <!-- Clarification Box: Correo + Redirección (Mobile First) -->
+        <div class="bg-amber-50/90 border-y border-amber-200/90 p-4 sm:p-5 text-amber-950">
+          <div class="flex items-center gap-2 mb-2.5">
+            <ShieldCheck class="w-4 h-4 text-amber-600 shrink-0" />
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-900">¿Cómo funciona? (Acceso en 2 pasos)</span>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm text-slate-700">
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">1</span>
+              <p class="leading-snug">
+                <strong class="text-slate-900">Envío a tu correo:</strong> El Checklist en PDF llegará directamente a tu bandeja de entrada para que lo descargues.
+              </p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">2</span>
+              <p class="leading-snug">
+                <strong class="text-slate-900">Redirección automática:</strong> Al enviar el formulario, te redirigiremos de inmediato a la web con todo el temario, avales y detalles del <strong class="text-amber-950">Diplomado Profesional</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="p-5 sm:p-7 space-y-5">
+          <div x-data="leadForm" class="space-y-4">
+
+            <!-- Success State -->
+            <div 
+              x-show="submitted" 
+              x-transition.opacity 
+              style="display: none;" 
+              class="text-center space-y-3 py-6 px-2"
+            >
+              <div class="inline-flex items-center justify-center bg-emerald-500/20 text-emerald-500 p-3 rounded-full border border-emerald-400/30 mb-1">
+                <CheckCircle class="w-10 h-10 sm:w-12 sm:h-12 text-emerald-600" />
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold font-serif text-navy">¡Registro Exitoso!</h3>
+              <p class="text-sm text-slate-600 max-w-sm mx-auto">
+                Tu checklist va en camino a tu correo. <br />
+                <span class="font-semibold text-slate-800">Redirigiéndote a la información completa del Diplomado...</span>
+              </p>
+              <div class="flex justify-center pt-3">
+                <svg class="animate-spin h-6 w-6 text-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Form Fields -->
+            <div x-show="!submitted" class="space-y-4">
+
+              <!-- Nombre -->
+              <div>
+                <label for="lead_nombre" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Nombre Completo
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <User class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="text" 
+                    id="lead_nombre" 
+                    x-model="nombre"
+                    autocomplete="name"
+                    required
+                    placeholder="Ej. María Pérez" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="lead_email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Correo Electrónico (donde recibirás el checklist)
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <Mail class="w-4 h-4" />
+                  </div>
+                  <input 
+                    type="email" 
+                    id="lead_email" 
+                    x-model="email"
+                    autocomplete="email"
+                    inputmode="email"
+                    required
+                    placeholder="Ej. maria@correo.com" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                  />
+                </div>
+              </div>
+
+
+              <!-- Submit Button sutil y elegante -->
+              <div class="pt-1">
+                <button 
+                  @click="submitLead()"
+                  :disabled="!isFormValid || sending"
+                  class="group w-full bg-navy hover:bg-slate-800 text-white font-semibold text-sm py-3.5 px-5 rounded-xl shadow-sm hover:shadow transition-all text-center relative overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99] cursor-pointer"
+                >
+                  <!-- Ready State -->
+                  <div 
+                    x-show="!sending" 
+                    class="flex items-center justify-center gap-2"
+                  >
+                    <span>Recibir Checklist y ver información</span>
+                    <ArrowRight class="w-4 h-4 text-gold shrink-0 transition-transform group-hover:translate-x-0.5" />
+                  </div>
+
+                  <!-- Loading State -->
+                  <div 
+                    x-show="sending" 
+                    class="flex items-center justify-center gap-2"
+                  >
+                    <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-xs tracking-wider uppercase font-semibold">Procesando...</span>
+                  </div>
+                </button>
+
+                <div class="text-center space-y-1 mt-2.5">
+                  <p class="text-[11px] text-slate-500">
+                    📩 Te enviaremos el PDF por correo y te mostraremos la información del diplomado.
+                  </p>
+                  <p class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
+                    <Lock class="w-3 h-3" />
+                    <span>Sin spam. Privacidad 100% protegida.</span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script is:inline>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('leadForm', () => ({
+        nombre: '',
+        email: '',
+        sending: false,
+        submitted: false,
+
+        get isEmailValid() {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim());
+        },
+
+        get isFormValid() {
+          return this.nombre.trim().length >= 2 && this.isEmailValid;
+        },
+
+        async submitLead() {
+          if (!this.isFormValid || this.sending) return;
+          this.sending = true;
+
+          // Meta Pixel Lead
+          try {
+            if (window.fbq) {
+              fbq('track', 'Lead', {
+                content_name: 'Checklist Wedding Planner',
+                content_category: 'Lead Magnet',
+                currency: 'USD',
+                value: 0
+              });
+            }
+          } catch(e) {}
+
+          // GA4 Lead
+          try {
+            if (window.gtag) {
+              gtag('event', 'generate_lead', {
+                event_category: 'Lead Magnet',
+                event_label: 'Checklist Wedding Planner'
+              });
+            }
+          } catch(e) {}
+
+          // Payload para Google Sheets (LEAD_USA_WEDDING -> wedding)
+          const payload = JSON.stringify({
+            'NOMBRE Y APELLIDOS': this.nombre.trim(),
+            'CORREO ELECTRÓNICO': this.email.trim(),
+            nombre: this.nombre.trim(),
+            email: this.email.trim(),
+            hoja: 'wedding',
+            documento: 'LEAD_USA_WEDDING',
+            origen: 'weddingusa',
+            tipo_lead: 'checklist_wedding_planner',
+            page_url: window.location.href,
+            user_agent: navigator.userAgent
+          });
+
+          try {
+            await Promise.race([
+              fetch('https://script.google.com/macros/s/AKfycbxhu4jwl2ilgEOa28rqF5dbT6rGPqB4Kzebqphz4D311xYn6CFBFAS63B8sPwVijj40/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                keepalive: true,
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: payload
+              }),
+              new Promise((resolve) => setTimeout(resolve, 1400))
+            ]);
+          } catch(e) {
+            console.warn('[Lead]', e);
+          }
+
+          this.submitted = true;
+
+          // Redirección a la landing principal del diplomado
+          const params = new URLSearchParams(window.location.search);
+          params.set('lead', 'ok');
+          setTimeout(() => {
+            window.location.href = '/?' + params.toString();
+          }, 1400);
+        }
+      }));
+    });
+  </script>
+</Layout>

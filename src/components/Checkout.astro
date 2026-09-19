@@ -27,14 +27,14 @@ import FAQ from './FAQ.astro';
             loading: false,
             plan: 'full', 
             get total() { 
-              if(this.plan === 'full') return 430.00;
-              if(this.plan === 'finance1') return 235.00;
-              if(this.plan === 'finance2') return 165.00;
+              if(this.plan === 'full') return 297.00;
+              if(this.plan === 'finance1') return 148.50;
+              if(this.plan === 'finance2') return 99.00;
             },
             get planName() {
               if(this.plan === 'full') return 'Pago Único';
-              if(this.plan === 'finance1') return '2 Cuotas Mensuales';
-              if(this.plan === 'finance2') return '3 Cuotas Mensuales';
+              if(this.plan === 'finance1') return '2 Cuotas Mensuales (Sin Interés)';
+              if(this.plan === 'finance2') return '3 Cuotas Mensuales (Sin Interés)';
             },
             async processFinalStep() {
               this.loading = true;
@@ -78,7 +78,12 @@ import FAQ from './FAQ.astro';
         
         <div id="payment-section" class="space-y-8">
           <div>
-            <p class="font-bold text-navy mb-2">1. Elige tu plan de pago:</p>
+            <div class="flex items-center justify-between mb-2">
+              <p class="font-bold text-navy">1. Elige tu plan de pago:</p>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                ✨ Financiamiento sin interés
+              </span>
+            </div>
             
             <!-- Plan Full -->
             <div class="border rounded-lg p-3 cursor-pointer transition-all" 
@@ -95,7 +100,7 @@ import FAQ from './FAQ.astro';
                 </div>
                 <div class="text-right">
                   <p class="font-bold text-emerald-600">
-                    <span class="text-slate-400 line-through text-xs mr-1.5 font-normal">$573 USD</span>$430 USD
+                    <span class="text-slate-400 line-through text-xs mr-1.5 font-normal">$396 USD</span>$297 USD
                   </p>
                 </div>
               </div>
@@ -112,11 +117,11 @@ import FAQ from './FAQ.astro';
                   </div>
                   <div>
                     <p class="font-bold text-navy text-sm">2 Cuotas Mensuales</p>
-                    <p class="text-xs text-slate-500">$235 Inicial + 1 de $235</p>
+                    <p class="text-xs text-slate-500">$148.50 hoy + 1 cuota coordinada con soporte (Sin cobros automáticos)</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <p class="font-bold text-navy">$235 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                  <p class="font-bold text-navy">$148.50 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
                 </div>
               </div>
             </div>
@@ -132,11 +137,11 @@ import FAQ from './FAQ.astro';
                   </div>
                   <div>
                     <p class="font-bold text-navy text-sm">3 Cuotas Mensuales</p>
-                    <p class="text-xs text-slate-500">$165 Inicial + 2 de $165</p>
+                    <p class="text-xs text-slate-500">$99 hoy + 2 cuotas coordinadas con soporte (Sin cobros automáticos)</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <p class="font-bold text-navy">$165 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
+                  <p class="font-bold text-navy">$99 USD <span class="text-[10px] font-normal text-slate-400">/hoy</span></p>
                 </div>
               </div>
             </div>
@@ -157,21 +162,27 @@ import FAQ from './FAQ.astro';
             </div>
           </div>
 
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <div class="bg-blue-50 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-blue-100 transition-colors" onclick="window.open('https://wa.me/13072923715?text=Hola%2C%20tengo%20problemas%20para%20realizar%20el%20pago%20en%20la%20web%20del%20%2ADIPLOMADO%20PROFESIONAL%20EN%20ORGANIZACI%C3%93N%20DE%20EVENTOS%20%26%20WEDDING%20PLANNING%2A', '_blank')">
+          <!-- Botón Hablar con un Asesor (Justo después del Resumen del Pedido) -->
+          <div class="mt-4">
+            <a 
+              href="https://wa.me/13072923715?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor%20sobre%20mi%20inscripci%C3%B3n%20en%20el%20%2ADIPLOMADO%20PROFESIONAL%20EN%20ORGANIZACI%C3%93N%20DE%20EVENTOS%20%26%20WEDDING%20PLANNING%2A"
+              target="_blank"
+              class="w-full bg-emerald-50/80 hover:bg-emerald-100/90 border border-emerald-200 rounded-xl p-3.5 flex items-center justify-between group transition-all cursor-pointer shadow-sm"
+            >
               <div class="flex items-center gap-3">
-                <div class="bg-white p-2 rounded-full text-blue-600 shadow-sm border border-blue-100 group-hover:scale-110 transition-transform">
+                <div class="bg-white p-2 rounded-full text-emerald-600 shadow-sm border border-emerald-100 group-hover:scale-110 transition-transform">
                    <HelpCircle class="w-5 h-5" />
                 </div>
-                <div>
-                  <p class="text-sm font-bold text-navy">¿Problemas con el pago?</p>
-                  <p class="text-xs text-slate-500">Contactar Soporte de Caja</p>
+                <div class="text-left">
+                  <p class="text-sm font-bold text-navy group-hover:text-emerald-900 transition-colors">¿Tienes dudas con tu inscripción?</p>
+                  <p class="text-xs text-slate-500">Un asesor académico está disponible para ayudarte</p>
                 </div>
               </div>
-              <div class="bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-sm border border-blue-100">
-                Ayuda
+              <div class="bg-emerald-600 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm group-hover:bg-emerald-700 transition-colors shrink-0 flex items-center gap-1.5">
+                <span>Hablar con un asesor</span>
+                <span>→</span>
               </div>
-            </div>
+            </a>
           </div>
 
           <!-- Final Validation and Stripe Button -->
