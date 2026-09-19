@@ -158,6 +158,10 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Forzar desactivación de Adaptive Pricing a nivel de API para cobrar SIEMPRE en USD
+    // e impedir conversiones automáticas a moneda local (ej. Balboas PAB, etc.)
+    sessionConfig.adaptive_pricing = { enabled: false };
+
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return new Response(JSON.stringify({ url: session.url }), {
