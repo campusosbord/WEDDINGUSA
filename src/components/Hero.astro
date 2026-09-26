@@ -86,10 +86,41 @@ import heroImage from '../images/wedding-hero.webp';
           x-data="{
             nombre: '',
             email: '',
+            registeredEmail: '',
             sending: false,
             submitted: false,
             errorMessage: '',
             emailSuggestion: '',
+            init() {
+              try {
+                const saved = localStorage.getItem('osbord_wedding_lead');
+                if (saved) {
+                  const data = JSON.parse(saved);
+                  if (data && data.email) {
+                    this.submitted = true;
+                    this.registeredEmail = data.email;
+                  }
+                }
+              } catch(e) {}
+
+              window.addEventListener('osbord-lead-registered', (e) => {
+                if (e.detail && e.detail.email) {
+                  this.submitted = true;
+                  this.registeredEmail = e.detail.email;
+                }
+              });
+            },
+            resetLead() {
+              try {
+                localStorage.removeItem('osbord_wedding_lead');
+              } catch(e) {}
+              this.submitted = false;
+              this.registeredEmail = '';
+              this.email = '';
+              this.nombre = '';
+              this.errorMessage = '';
+              this.emailSuggestion = '';
+            },
             cleanEmail(val) {
               if (!val) return '';
               return String(val)
@@ -184,6 +215,19 @@ import heroImage from '../images/wedding-hero.webp';
                 return;
               }
 
+              // Si ya se registró previamente con este correo, evitar duplicado
+              try {
+                const saved = localStorage.getItem('osbord_wedding_lead');
+                if (saved) {
+                  const data = JSON.parse(saved);
+                  if (data && data.email && data.email.toLowerCase() === this.email.toLowerCase()) {
+                    this.submitted = true;
+                    this.registeredEmail = data.email;
+                    return;
+                  }
+                }
+              } catch(e) {}
+
               this.sending = true;
 
               // Tracking
@@ -236,6 +280,20 @@ import heroImage from '../images/wedding-hero.webp';
                 console.warn('[Lead Hero]', e);
               }
 
+              // Sincronizar en localStorage y notificar al otro formulario
+              try {
+                localStorage.setItem('osbord_wedding_lead', JSON.stringify({
+                  email: this.email,
+                  nombre: this.nombre.trim(),
+                  timestamp: Date.now()
+                }));
+              } catch(e) {}
+
+              window.dispatchEvent(new CustomEvent('osbord-lead-registered', {
+                detail: { email: this.email, nombre: this.nombre.trim() }
+              }));
+
+              this.registeredEmail = this.email;
               this.sending = false;
               this.submitted = true;
             }
@@ -262,7 +320,7 @@ import heroImage from '../images/wedding-hero.webp';
             </h4>
             
             <p class="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-md mx-auto">
-              Hemos despachado la guía oficial a tu correo electrónico. Ya está lista para ser descargada en tu bandeja de entrada.
+              Hemos despachado la guía oficial a <strong class="text-gold-light" x-text="registeredEmail || email"></strong>. Ya está lista para ser descargada en tu bandeja de entrada.
             </p>
 
             <div class="p-3 sm:p-3.5 bg-white/5 rounded-xl border border-white/10 text-xs text-slate-300 max-w-md mx-auto">
@@ -271,7 +329,7 @@ import heroImage from '../images/wedding-hero.webp';
               </p>
             </div>
 
-            <div class="pt-2">
+            <div class="pt-2 flex flex-col items-center gap-2">
               <a 
                 href="#video-section" 
                 class="inline-flex items-center gap-2 text-xs sm:text-sm text-gold-light hover:text-white font-medium underline underline-offset-4 transition-colors"
@@ -279,6 +337,14 @@ import heroImage from '../images/wedding-hero.webp';
                 <span>Desplazarse al video de presentación</span>
                 <ArrowRight class="w-4 h-4" />
               </a>
+
+              <button 
+                type="button" 
+                @click="resetLead()"
+                class="text-[11px] text-slate-400 hover:text-slate-200 underline mt-1 cursor-pointer"
+              >
+                ¿Deseas enviar a otro correo?
+              </button>
             </div>
           </div>
 
