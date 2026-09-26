@@ -104,6 +104,7 @@ import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } f
                     type="text" 
                     id="lead_nombre" 
                     x-model="nombre"
+                    @input="errorMessage = ''"
                     autocomplete="name"
                     required
                     placeholder="Ej. María Pérez" 
@@ -122,9 +123,12 @@ import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } f
                     <Mail class="w-4 h-4" />
                   </div>
                   <input 
-                    type="email" 
+                    type="text" 
                     id="lead_email" 
                     x-model="email"
+                    @input="email = cleanEmail($el.value); errorMessage = ''"
+                    @paste="$nextTick(() => { email = cleanEmail($el.value); errorMessage = '' })"
+                    @blur="email = cleanEmail(email)"
                     autocomplete="email"
                     inputmode="email"
                     required
@@ -134,13 +138,19 @@ import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } f
                 </div>
               </div>
 
+              <!-- Error message if validation fails -->
+              <div x-show="errorMessage" x-transition.opacity style="display: none;" class="p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+                <span x-text="errorMessage"></span>
+              </div>
 
               <!-- Submit Button sutil y elegante -->
               <div class="pt-1">
                 <button 
+                  type="button"
                   @click="submitLead()"
-                  :disabled="!isFormValid || sending"
-                  class="group w-full bg-navy hover:bg-slate-800 text-white font-semibold text-sm py-3.5 px-5 rounded-xl shadow-sm hover:shadow transition-all text-center relative overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99] cursor-pointer"
+                  :disabled="sending"
+                  class="group w-full bg-navy hover:bg-slate-800 text-white font-semibold text-sm py-3.5 px-5 rounded-xl shadow-sm hover:shadow transition-all text-center relative overflow-hidden disabled:opacity-50 cursor-pointer active:scale-[0.99]"
                 >
                   <!-- Ready State -->
                   <div 
@@ -193,9 +203,20 @@ import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } f
         email: '',
         sending: false,
         submitted: false,
+        errorMessage: '',
+
+        cleanEmail(val) {
+          if (!val) return '';
+          return String(val)
+            .replace(/^mailto:/i, '')
+            .replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '')
+            .replace(/\s+/g, '')
+            .trim();
+        },
 
         get isEmailValid() {
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim());
+          const cleaned = this.cleanEmail(this.email);
+          return cleaned.length >= 5 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleaned);
         },
 
         get isFormValid() {
@@ -203,7 +224,20 @@ import { ShieldCheck, User, Mail, Gift, CheckCircle, ArrowRight, Lock, Check } f
         },
 
         async submitLead() {
-          if (!this.isFormValid || this.sending) return;
+          if (this.sending) return;
+          this.email = this.cleanEmail(this.email);
+          this.errorMessage = '';
+
+          if (!this.nombre || this.nombre.trim().length < 2) {
+            this.errorMessage = 'Por favor ingresa tu nombre completo (mínimo 2 letras).';
+            return;
+          }
+
+          if (!this.isEmailValid) {
+            this.errorMessage = 'Por favor verifica que tu correo electrónico sea válido.';
+            return;
+          }
+
           this.sending = true;
 
           // Meta Pixel Lead
