@@ -37,6 +37,7 @@ import { Gift, User, Mail, ArrowRight, CheckCircle, Lock, Sparkles } from '@luci
         sending: false,
         submitted: false,
         errorMessage: '',
+        emailSuggestion: '',
         cleanEmail(val) {
           if (!val) return '';
           return String(val)
@@ -45,12 +46,75 @@ import { Gift, User, Mail, ArrowRight, CheckCircle, Lock, Sparkles } from '@luci
             .replace(/\s+/g, '')
             .trim();
         },
+        validateEmail(emailVal) {
+          const email = this.cleanEmail(emailVal).toLowerCase();
+          this.emailSuggestion = '';
+
+          if (!email) return { valid: false, error: 'Por favor ingresa tu correo electrónico.' };
+          if (!email.includes('@')) return { valid: false, error: 'El correo debe incluir un @.' };
+
+          const parts = email.split('@');
+          if (parts.length !== 2) return { valid: false, error: 'El formato del correo es inválido.' };
+
+          const [user, domain] = parts;
+          if (!user || user.length < 1) return { valid: false, error: 'Falta el nombre de usuario antes del @.' };
+          if (!domain || !domain.includes('.')) return { valid: false, error: 'Falta la extensión del dominio (ej. .com).' };
+
+          // Sintaxis estricta: extensión mínima de 2 letras y sin caracteres ilegales
+          const regex = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!regex.test(email) || domain.includes('..')) {
+            return { valid: false, error: 'Por favor ingresa un correo con formato válido (ej. nombre@correo.com).' };
+          }
+
+          // Filtro de dominios falsos y servicios de correo temporal
+          const fakeDomains = ['test.com', 'test.es', 'ejemplo.com', 'correo.com', 'asdf.com', 'fake.com', '123.com', 'yopmail.com', 'mailinator.com', 'tempmail.com', 'guerrillamail.com', '10minutemail.com', 'trashmail.com'];
+          if (fakeDomains.includes(domain) || user === 'test' || user === 'asdf' || user === '123') {
+            return { valid: false, error: 'Por favor ingresa un correo electrónico real para recibir el checklist.' };
+          }
+
+          // Detección de errores tipográficos en los dominios más populares
+          const typoMap = {
+            'gmai.com': 'gmail.com',
+            'gamil.com': 'gmail.com',
+            'gmial.com': 'gmail.com',
+            'gmaill.com': 'gmail.com',
+            'gnail.com': 'gmail.com',
+            'gmeil.com': 'gmail.com',
+            'gmaik.com': 'gmail.com',
+            'hotmial.com': 'hotmail.com',
+            'hotmai.com': 'hotmail.com',
+            'hotmali.com': 'hotmail.com',
+            'homail.com': 'hotmail.com',
+            'outlok.com': 'outlook.com',
+            'outloo.com': 'outlook.com',
+            'outllok.com': 'outlook.com',
+            'yaho.com': 'yahoo.com',
+            'yahooo.com': 'yahoo.com',
+            'yhaoo.com': 'yahoo.com',
+            'iclud.com': 'icloud.com',
+            'icoud.com': 'icloud.com'
+          };
+
+          if (typoMap[domain]) {
+            const suggested = `${user}@${typoMap[domain]}`;
+            this.emailSuggestion = suggested;
+            return { valid: false, error: `¿Quisiste decir ${suggested}?`, suggestion: suggested };
+          }
+
+          return { valid: true, error: '' };
+        },
         get isEmailValid() {
-          const cleaned = this.cleanEmail(this.email);
-          return cleaned.length >= 5 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleaned);
+          return this.validateEmail(this.email).valid;
         },
         get isFormValid() {
           return this.nombre.trim().length >= 2 && this.isEmailValid;
+        },
+        applySuggestion() {
+          if (this.emailSuggestion) {
+            this.email = this.emailSuggestion;
+            this.emailSuggestion = '';
+            this.errorMessage = '';
+          }
         },
         async submitLead() {
           if (this.sending) return;
@@ -62,8 +126,9 @@ import { Gift, User, Mail, ArrowRight, CheckCircle, Lock, Sparkles } from '@luci
             return;
           }
 
-          if (!this.isEmailValid) {
-            this.errorMessage = 'Por favor verifica que tu correo electrónico sea válido.';
+          const emailCheck = this.validateEmail(this.email);
+          if (!emailCheck.valid) {
+            this.errorMessage = emailCheck.error;
             return;
           }
 
@@ -214,14 +279,20 @@ import { Gift, User, Mail, ArrowRight, CheckCircle, Lock, Sparkles } from '@luci
               type="text" 
               id="rescate_email"
               x-model="email"
-              @input="email = cleanEmail($el.value); errorMessage = ''"
-              @paste="$nextTick(() => { email = cleanEmail($el.value); errorMessage = '' })"
-              @blur="email = cleanEmail(email)"
+              @input="email = cleanEmail($el.value); validateEmail(email); errorMessage = ''"
+              @paste="$nextTick(() => { email = cleanEmail($el.value); validateEmail(email); errorMessage = '' })"
+              @blur="email = cleanEmail(email); validateEmail(email)"
               autocomplete="email"
               inputmode="email"
               placeholder="Ej. carolina@correo.com" 
               class="w-full bg-white/10 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
             />
+          </div>
+
+          <!-- Interactive Typo Suggestion Box -->
+          <div x-show="emailSuggestion" x-transition.opacity style="display: none;" class="mt-1.5 p-2 rounded-lg bg-amber-500/20 border border-amber-400/35 text-amber-200 text-xs flex items-center justify-between gap-2 shadow-sm">
+            <span class="truncate">¿Quisiste decir <strong class="text-white underline" x-text="emailSuggestion"></strong>?</span>
+            <button type="button" @click="applySuggestion()" class="px-2.5 py-1 bg-gold hover:bg-gold-light text-navy font-bold text-[11px] rounded-md transition-colors shrink-0 cursor-pointer">Corregir</button>
           </div>
         </div>
 
